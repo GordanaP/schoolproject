@@ -35,3 +35,30 @@ $factory->define(App\Classroom::class, function (Faker\Generator $faker) {
         'label' => str_random(2),
     ];
 });
+
+//Student
+$factory->define(App\Student::class, function (Faker\Generator $faker) {
+
+    return [
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'user_id' => function(){
+            return factory(App\User::class)->create()->id;
+        },
+        'classroom_id' => function(){
+            return factory(App\Classroom::class)->create()->id;
+        }
+    ];
+});
+
+//Teacher
+$factory->define(App\Teacher::class, function (Faker\Generator $faker) {
+    return [
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'user_id' => function(){
+            return factory(App\User::class)->create()->id;
+        },
+    ];
+});
+

@@ -26,3 +26,12 @@ $factory->define(App\Role::class, function (Faker\Generator $faker) {
         'name' => $faker->word,
     ];
 });
+
+
+//Classroom
+$factory->define(App\Classroom::class, function (Faker\Generator $faker) {
+
+    return [
+        'label' => str_random(2),
+    ];
+});

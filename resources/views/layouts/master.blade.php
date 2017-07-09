@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body style="font-family: 'Roboto Slab', serif;">
     <div id="app">
 
         @include('partials.top._nav')

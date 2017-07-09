@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('plain.content')
+@section('master.content')
 
     <h1>Landing page</h1>
 

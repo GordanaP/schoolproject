@@ -6,6 +6,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
+
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
@@ -61,8 +62,9 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-success">
-                                    Register
+                                <button class="btn btn-warning text-uppercase">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                    {{ $button ?? '' }}
                                 </button>
                             </div>
                         </div>

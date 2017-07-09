@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -13,7 +14,7 @@ class PageController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('welcome');
     }
 
     /**
@@ -34,6 +35,16 @@ class PageController extends Controller
     public function welcome()
     {
         return view('welcome');
+    }
+
+    /**
+     * Show the application landing page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function settings(User $user)
+    {
+        return view('pages.settings', compact('user'));
     }
 
 

@@ -26,7 +26,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('login') }}">
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i> Login
+                    </a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
@@ -35,11 +37,14 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ route('pages.settings', Auth::user()) }}">
+                                <i class="fa fa-wrench" aria-hidden="true"></i> Settings
+                            </a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                    Logout
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

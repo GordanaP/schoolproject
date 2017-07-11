@@ -24,7 +24,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        //
+        return view('accounts.create');
     }
 
     /**
@@ -35,7 +35,13 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        return back();
     }
 
     /**
@@ -68,6 +74,29 @@ class AccountController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
+    {
+        if ($request->password == '')
+        {
+            $user->update($request->except('password'));
+        }
+        else
+        {
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password)
+            ]);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePassword(Request $request, User $user)
     {
         if (! $request->password == '')
         {

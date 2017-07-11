@@ -39,7 +39,7 @@
                 @endslot
 
                 @slot('form')
-                   <form action="{{ route('accounts.update', $user) }}" method="POST" class="form-horizontal">
+                   <form action="{{ route('accounts.update.password', $user) }}" method="POST" class="form-horizontal">
 
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}

@@ -47,4 +47,42 @@ class User extends Authenticatable
         return $this->hasOne(Teacher::class);
     }
 
+    /**
+     * An authenticated user has one or multiple roles.
+     *
+     * @param  string or coll  $role
+     * @return boolean
+     */
+    public function hasRole($role)
+    {
+        //$role is a string
+        if (is_string($role))
+        {
+            return $this->roles->contains('name', $role);
+        }
+
+        //$role is a collection
+        return (bool) $role->intersect($this->roles)->count();
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
+
+    public function isStudent()
+    {
+        return $this->hasRole('student');
+    }
+
+    public function isTeacher()
+    {
+        return $this->hasRole('teacher');
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->hasRole('superadmin');
+    }
+
 }

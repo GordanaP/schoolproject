@@ -65,7 +65,7 @@ class AccountController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('accounts.edit', compact('user'));
     }
 
     /**
@@ -89,6 +89,8 @@ class AccountController extends Controller
                 'password' => bcrypt($request->password)
             ]);
         }
+
+        return redirect()->route('accounts.edit', $user);
     }
 
     /**
@@ -119,6 +121,8 @@ class AccountController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return back();
     }
 }

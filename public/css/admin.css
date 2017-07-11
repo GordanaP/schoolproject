@@ -1,10 +1,14 @@
-h1,h2,h3,h4,h5,h6{margin: 0;}
-
 .admin__panel{margin-top: 30px;}
 .admin__panel .panel-body{box-shadow: 0 2px 4px rgba(0,0,0,0.18)}
 
 button.account__btn__class { background-color: #e4c201; border: 1px solid #cbad01 }
 button.account__btn__class:hover { background-color:  #509195; border: 1px solid #478285;}
+
+table.admin__table .btn-warning{ margin-right: 5px; color: #fff}
+table.admin__table .btn-danger{ background: firebrick; border: 1px solid #ab2121}
+table.admin__table a{ color: #509195}
+
+
 /*
  * Base structure
  */

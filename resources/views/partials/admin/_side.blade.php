@@ -9,7 +9,7 @@
 
     <div class="collapse" id="collapseExample">
         <div class="well">
-            <a href="#">List</a>
+            <a href="{{ route('accounts.index') }}">All Accounts</a>
         </div>
         <div class="well">
             <a href="{{ route('accounts.create') }}">Create new</a>

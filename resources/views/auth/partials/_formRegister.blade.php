@@ -2,7 +2,7 @@
 <div class="form-group">
     <label for="name" class="col-md-3 control-label">Name</label>
     <div class="col-md-8">
-        <input type="text" name="name" id="name" placeholder="Choose a name" class="form-control" value="{{ $name }}" {{ $field_status ?? '' }}>
+        <input type="text" name="name" id="name" placeholder="Choose a name" class="form-control" value="{{ $name  }}" {{ $field_status ?? '' }}>
     </div>
 </div>
 
@@ -33,7 +33,7 @@
 <!-- Button -->
 <div class="form-group">
     <div class="col-md-6 col-md-offset-3">
-        <button type="submit" class="btn btn-success text-uppercase ls {{ $class ?? '' }}" >
+        <button type="submit" class="btn btn-success text-uppercase ls {{ $class ?? '' }}" id="register">
             {{ $button }}
         </button>
     </div>

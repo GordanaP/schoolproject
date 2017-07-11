@@ -37,9 +37,18 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
+        $n = random_int(1000, 9999);
+
+        $first_name = strtolower($request->first_name);
+        $last_name = strtolower($request->last_name);
+
+        $name = $first_name . $last_name . $n;
+        $email = $first_name .'.'. $last_name . $n . '@laraschool.com';
+
+
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name' => $name,
+            'email' => $email,
             'password' => bcrypt($request->password)
         ]);
 

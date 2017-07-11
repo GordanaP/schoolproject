@@ -8,6 +8,8 @@ table.admin__table .btn-warning{ margin-right: 5px; color: #fff}
 table.admin__table .btn-danger{ background: firebrick; border: 1px solid #ab2121}
 table.admin__table a{ color: #509195}
 
+table.admin__table tr td,
+table.admin__table th {padding: 8px 16px !important;}
 
 /*
  * Base structure

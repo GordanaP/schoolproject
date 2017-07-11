@@ -4,7 +4,7 @@
         <th class="text-center" width="100px">
             <i class="fa fa-cog"></i>
         </th>
-        <th class="text-uppercase">Name</th>
+        <th class="text-uppercase"  width="300px">Name</th>
         <th class="text-uppercase">Email</th>
     </thead>
 
@@ -29,7 +29,7 @@
                 </form>
 
             </td>
-            <td>
+            <td width="300px">
                 <a href="#">
                     {{ $user->name }}
                 </a>

@@ -9,8 +9,6 @@ class TeacherObserver
 {
     public function creating(Teacher $teacher)
     {
-        $user = User::where('id', $teacher->user_id)->first();
-
-        $teacher->slug = $user->name;
+        $teacher->slug = strtolower($teacher->first_name) . '-' . strtolower($teacher->last_name) . '-' . random_int(10, 99);;
     }
 }

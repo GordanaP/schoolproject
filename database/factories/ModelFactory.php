@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-//User
+// User
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -19,7 +19,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-//Role
+// Role
 $factory->define(App\Role::class, function (Faker\Generator $faker) {
 
     return [
@@ -27,8 +27,7 @@ $factory->define(App\Role::class, function (Faker\Generator $faker) {
     ];
 });
 
-
-//Classroom
+// Classroom
 $factory->define(App\Classroom::class, function (Faker\Generator $faker) {
 
     return [
@@ -36,7 +35,7 @@ $factory->define(App\Classroom::class, function (Faker\Generator $faker) {
     ];
 });
 
-//Student
+// Student
 $factory->define(App\Student::class, function (Faker\Generator $faker) {
 
     return [
@@ -51,7 +50,7 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
     ];
 });
 
-//Teacher
+// Teacher
 $factory->define(App\Teacher::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $faker->firstName,
@@ -62,3 +61,10 @@ $factory->define(App\Teacher::class, function (Faker\Generator $faker) {
     ];
 });
 
+// Subject
+$factory->define(App\Subject::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->word,
+    ];
+});

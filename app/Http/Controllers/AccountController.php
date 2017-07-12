@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AccountRequest;
+use App\Role;
+use App\Student;
+use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -35,22 +39,33 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
-        $n = random_int(1000, 9999);
+        $a = random_int(1000, 9999);
+        $b = random_int(10, 99);
 
-        $first_name = strtolower($request->first_name);
-        $last_name = strtolower($request->last_name);
+        $name = name($request->first_name, $request->last_name, $a);
+        $email = email($request->first_name, $request->last_name, $b);
 
-        $name = $first_name . $last_name . $n;
-        $email = $first_name .'.'. $last_name . $n . '@laraschool.com';
-
-
-        User::create([
+        $user = User::create([
             'name' => $name,
             'email' => $email,
             'password' => bcrypt($request->password)
         ]);
+
+        $user->roles()->attach($request->role_id);
+
+        $roles = Role::whereIn('id', $request->role_id)->pluck('name')->toArray();
+
+        if(in_array('teacher', $roles))
+        {
+            $user->teacher()->create($request->all());
+        }
+
+        if(in_array('student', $roles))
+        {
+            $user->student()->create($request->all());
+        }
 
         return back();
     }
@@ -119,7 +134,6 @@ class AccountController extends Controller
 
             return back();
         }
-
     }
 
     /**

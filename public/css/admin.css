@@ -12,6 +12,14 @@ table.admin__table tr td,
 table.admin__table th {padding: 8px 16px !important;}
 
 /*
+ * Select 2 override
+ */
+
+span.select2-selection.select2-selection--multiple{ border-radius: 0 !important; border-color:#cccccc; }
+input.select2-search__field{ padding: 5px 18px !important; color: #333333 !important;}
+li.select2-selection__choice{margin-top: 10px !important;}
+
+/*
  * Base structure
  */
 

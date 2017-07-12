@@ -19,8 +19,8 @@
                         {{ method_field('PUT') }}
 
                         @include('auth.partials._formRegister', [
-                            'name' => old('name') ?? $user->name,
-                            'email' => old('email') ?? $user->email,
+                            'first_name' => old('first_name'),
+                            'last_name' => old('last_name'),
                             'button' => 'Save changes',
                             'class' => 'account__btn__class'
                         ])

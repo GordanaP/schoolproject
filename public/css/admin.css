@@ -1,28 +1,45 @@
-.admin__panel{margin-top: 30px;}
-.admin__panel .panel-body{box-shadow: 0 2px 4px rgba(0,0,0,0.18)}
+.admin__panel .panel-body { box-shadow: 0 2px 4px rgba(0,0,0,0.18);}
+.admin__panel .panel-body p { font-size: 13px; font-family: 'Gabriela', serif; margin-bottom: 30px;}
+.admin__panel .panel-heading h2 a.btn { background: firebrick; border-color: firebrick; margin-top: 2px;}
+.admin__panel .panel-heading h2 a.btn:hover { background-color:  #509195; border: 1px solid #478285;}
+.admin__panel .panel-heading h2 a.btn i { margin-right: 6px; }
 
-button.account__btn__class { background-color: #e4c201; border: 1px solid #cbad01 }
-button.account__btn__class:hover { background-color:  #509195; border: 1px solid #478285;}
+.account__button { background-color: #e4c201; border: 1px solid #cbad01 }
+.account__button:hover { background-color:  #509195; border: 1px solid #478285; }
 
 table.admin__table .btn-warning{ margin-right: 5px; color: #fff}
-table.admin__table .btn-danger{ background: firebrick; border: 1px solid #ab2121}
-table.admin__table a{ color: #509195}
+table.admin__table .btn-danger{ background: firebrick; border: 1px solid #ab2121 }
+table.admin__table a{ color: #509195 }
 
 table.admin__table tr td,
-table.admin__table th {padding: 8px 16px !important;}
+table.admin__table th { padding: 8px 16px !important; }
+
+.admin__breadcrumb ol.breadcrumb{ background: none; margin-bottom: 0; padding: 0;  }
+.admin__breadcrumb ol.breadcrumb li a{ color: #509195; }
+
+div.alert.alert-danger { background: #fcf8e3; border-color: #faebcc; color: #8a6d3b; }
+.asterisk { color:red; }
 
 /*
  * Select 2 override
  */
+.select2-selection.select2-selection--multiple{ border-radius: 0px !important; border-color:#cccccc;}
 
-span.select2-selection.select2-selection--multiple{ border-radius: 0 !important; border-color:#cccccc; }
-input.select2-search__field{ padding: 5px 18px !important; color: #333333 !important;}
+.select2-search__field{ padding: 5px 11px !important;}
+
 li.select2-selection__choice{margin-top: 10px !important;}
+
+.select2-dropdown{border-color: #cccccc; border-radius: 0; color: #9d9d9d}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple { border: solid 1px #cccccc;box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);}
+.select2-container--default .select2-results__option--highlighted[aria-selected] { background-color: #509195;}
+.select2-results__option {padding-left: 15px; }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {border-radius: 0;color: #333;}
 
 /*
  * Base structure
  */
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
@@ -33,7 +50,6 @@ body {
 /*
  * Global add-ons
  */
-
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;

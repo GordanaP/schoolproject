@@ -26,8 +26,7 @@ class AccountRequest extends FormRequest
         return [
             'first_name' => 'required|string|alpha',
             'last_name' => 'required|string|alpha',
-            'role_id' => 'required|integer|exists:roles,id',
-            'classroom_id' => 'required|integer|exists:classrooms,id',
+            'role_id' => 'required|exists:roles,id',
             'password' => 'required|string|min:6'
         ];
     }

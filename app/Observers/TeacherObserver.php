@@ -3,12 +3,11 @@
 namespace App\Observers;
 
 use App\Teacher;
-use App\User;
 
 class TeacherObserver
 {
     public function creating(Teacher $teacher)
     {
-        $teacher->slug = strtolower($teacher->first_name) . '-' . strtolower($teacher->last_name) . '-' . random_int(10, 99);;
+        $teacher->slug = strtolower($teacher->first_name) . '-' . strtolower($teacher->last_name) . '-' . random_int(10, 99);
     }
 }

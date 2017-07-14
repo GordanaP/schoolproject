@@ -101,18 +101,14 @@ class AccountController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if ($request->password == '')
-        {
-            $user->update($request->except('password'));
-        }
-        else
+        if ($request->password != '')
         {
             $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
                 'password' => bcrypt($request->password)
             ]);
         }
+
+        $user->roles()->sync($request->role_id);
 
         return redirect()->route('accounts.edit', $user);
     }

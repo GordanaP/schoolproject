@@ -1,4 +1,4 @@
-<table class="table admin__table">
+<table class="table admin__table" id="adminTable">
 
     <thead>
         <th class="text-center" width="100px">
@@ -6,6 +6,7 @@
         </th>
         <th class="text-uppercase"  width="300px">Name</th>
         <th class="text-uppercase">Email</th>
+        <th class="text-uppercase">Role</th>
     </thead>
 
     <tbody>
@@ -35,6 +36,11 @@
                 </a>
             </td>
             <td>{{ $user->email }}</td>
+            <td>
+                @foreach ($user->roles as $role)
+                    {{ $role->name }}
+                @endforeach
+            </td>
         </tr>
         @endforeach
     </tbody>

@@ -9,11 +9,14 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link href="{{ asset('css/general.css') }}" rel="stylesheet">
 
 <!-- Icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/elegant-icons-style.css') }}">
 
+<!-- Fonts -->
+{{-- <link href="https://fonts.googleapis.com/css?family=Gabriela" rel="stylesheet"> --}}
 
 <!-- Scripts -->
 <script>

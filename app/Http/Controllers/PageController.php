@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Gate;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -14,7 +15,8 @@ class PageController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('welcome');
+        //Authenticate
+        $this->middleware('auth')->only('home');
     }
 
     /**
@@ -57,6 +59,5 @@ class PageController extends Controller
     {
         return view('pages.dashboard');
     }
-
 
 }

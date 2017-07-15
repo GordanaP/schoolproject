@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use App\User;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -83,6 +84,16 @@ class User extends Authenticatable
     public function isSuperAdmin()
     {
         return $this->hasRole('superadmin');
+    }
+
+    public function owns($related)
+    {
+        return $this->id == $related->user_id;
+    }
+
+    public function me(User $user)
+    {
+        return $this->id == $user->id;
     }
 
 }

@@ -17,7 +17,7 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $roles = Role::orderBy('name', 'asc')->get();
+        $roles = Role::all();
         $classes = Classroom::all();
         $subjects = Subject::orderBy('name')->get();
 

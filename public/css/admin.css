@@ -1,5 +1,4 @@
 .admin__panel .panel-body { box-shadow: 0 2px 4px rgba(0,0,0,0.18);}
-.admin__panel .panel-body p { font-size: 13px; font-family: 'Gabriela', serif; margin-bottom: 30px;}
 .admin__panel .panel-heading h2 a.btn { background: firebrick; border-color: firebrick; margin-top: 2px;}
 .admin__panel .panel-heading h2 a.btn:hover { background-color:  #509195; border: 1px solid #478285;}
 .admin__panel .panel-heading h2 a.btn i { margin-right: 6px; }
@@ -7,18 +6,17 @@
 .account__button { background-color: #e4c201; border: 1px solid #cbad01 }
 .account__button:hover { background-color:  #509195; border: 1px solid #478285; }
 
-table.admin__table .btn-warning{ margin-right: 5px; color: #fff}
+table.admin__table .btn-warning{ margin-right: 5px; color: #fff; }
 table.admin__table .btn-danger{ background: firebrick; border: 1px solid #ab2121 }
 table.admin__table a{ color: #509195 }
 
 table.admin__table tr td,
-table.admin__table th { padding: 8px 16px !important; }
+table.admin__table th { padding: 8px 16px !important; font-size: 13px; }
 
 .admin__breadcrumb ol.breadcrumb{ background: none; margin-bottom: 0; padding: 0;  }
 .admin__breadcrumb ol.breadcrumb li a{ color: #509195; }
 
-div.alert.alert-danger { background: #fcf8e3; border-color: #faebcc; color: #8a6d3b; }
-.asterisk { color:red; }
+p.admin__checkbox {margin: 10px}
 
 /*
  * Select 2 override

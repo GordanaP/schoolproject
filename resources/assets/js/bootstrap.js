@@ -51,3 +51,12 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+
+window.Vue = require('vue');
+
+window.events = new Vue() //every Vue instance is alreay an event bus: vue.$on, vue.$emit
+
+window.flash = function (message) {
+    window.events.$emit('flash', message);
+}; //flash('my new message')

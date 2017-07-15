@@ -9,7 +9,7 @@
     <div class="panel-body">
 
         @if (Request::segment(2) != '')
-            <p style="">Fields marked with * are required.</p>
+            <p class="required__fields"> Fields marked with * are required. </p>
         @endif
 
         {{ $body }}

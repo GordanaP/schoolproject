@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AccountRequest;
+use App\Http\Requests\PasswordRequest;
 use App\Role;
 use App\Student;
 use App\Teacher;
 use App\User;
-use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
+    public function __construct()
+    {
+        //Authenticate
+        $this->middleware('auth')->only('show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('roles')->get();
 
         return view('accounts.index', compact('users'));
     }
@@ -36,7 +42,7 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\AccountRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(AccountRequest $request)
@@ -67,7 +73,8 @@ class AccountController extends Controller
             $user->student()->create($request->all());
         }
 
-        return back();
+        return back()
+            ->with('flash', 'A new account has been created.');
     }
 
     /**
@@ -95,13 +102,13 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\AccountRequest  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(AccountRequest $request, User $user)
     {
-        if ($request->password != '')
+        if (! $request->password == '')
         {
             $user->update([
                 'password' => bcrypt($request->password)
@@ -110,7 +117,8 @@ class AccountController extends Controller
 
         $user->roles()->sync($request->role_id);
 
-        return redirect()->route('accounts.edit', $user);
+        return redirect()->route('accounts.edit', $user)
+            ->with('flash', 'The account has been updated.');
     }
 
     /**
@@ -120,16 +128,16 @@ class AccountController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function updatePassword(Request $request, User $user)
+    public function updatePassword(PasswordRequest $request, User $user)
     {
         if (! $request->password == '')
         {
             $user->update([
                 'password' => bcrypt($request->password)
             ]);
-
-            return back();
         }
+
+        return back();
     }
 
     /**

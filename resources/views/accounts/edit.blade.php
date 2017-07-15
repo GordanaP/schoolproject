@@ -3,8 +3,7 @@
 @section('title', '| Adm | Create Account')
 
 @section('links')
-    <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Gabriela" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('vendor/parsley/parsley.css') }}">
 @endsection
 
 @section('content')
@@ -26,17 +25,19 @@
             @endslot
 
             @slot('body')
-                <form action="{{ route('accounts.update', $user) }}" method="POST" class="form-horizontal">
+                <form action="{{ route('accounts.update', $user) }}" method="POST" class="form-horizontal"
+                    data-parsley-validate=""
+                    data-parsley-trigger="keyup"
+                    data-parsley-validation-threshold="1"
+                >
 
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
 
                     @include('accounts.partials._formCreate', [
-                        'first_name' => $user->hasRole('student') ? $user->student->first_name : $user->teacher->first_name,
-                        'last_name' => $user->hasRole('student') ? $user->student->last_name : $user->teacher->last_name,
                         'ids' => $user->roles->pluck('id')->toArray(),
+                        'name' => $user->name,
                         'button' => 'Save changes',
-                        'class' => 'account__btn__class',
                     ])
 
                 </form>
@@ -47,24 +48,16 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
 
     <script>
-
-        // Initialize select 2
-        $('#role_id').select2({
-            placeholder: 'Select roles',
-            tags:true,
-        });
-
         // Set random password
         // <input type="text" id="password" onkeyup="setPassword()"
         function setPassword()
         {
-            var password = Math.random().toString(36).substring(7);
+            var password = Math.random().toString(36).substring(8);
 
             $('#password').val(password);
         }
-
     </script>
 @endsection

@@ -23,11 +23,24 @@ class AccountRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'first_name' => 'required|string|alpha',
-            'last_name' => 'required|string|alpha',
-            'role_id' => 'required|exists:roles,id',
-            'password' => 'required|string|min:6'
-        ];
+        switch ($this->method())
+        {
+            case 'POST':
+                return [
+                    'first_name' => 'required|string|alpha',
+                    'last_name' => 'required|string|alpha',
+                    'role_id' => 'required|exists:roles,id',
+                    'password' => 'required|string|min:6'
+                ];
+                break;
+
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'role_id' => 'required|exists:roles,id',
+                    'password' => 'nullable|string|min:6'
+                ];
+                break;
+        }
     }
 }

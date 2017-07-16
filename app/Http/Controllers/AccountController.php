@@ -8,6 +8,7 @@ use App\Role;
 use App\Student;
 use App\Teacher;
 use App\User;
+use Codecourse\Notify\Facades\Notify;
 
 class AccountController extends Controller
 {
@@ -137,6 +138,7 @@ class AccountController extends Controller
             ]);
         }
 
+        Notify::flash('The password has been changed.', 'success');
         return back();
     }
 

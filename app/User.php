@@ -91,9 +91,9 @@ class User extends Authenticatable
         return $this->id == $related->user_id;
     }
 
-    public function me(User $user)
+    public function me($user)
     {
-        return $this->id == $user->id;
+        return $this->id === $user->id;
     }
 
 }

@@ -17,6 +17,9 @@ class PageController extends Controller
     {
         //Authenticate
         $this->middleware('auth')->only('home');
+
+        //Authorize
+        $this->authorizeResource(User::class);
     }
 
     /**
@@ -40,7 +43,7 @@ class PageController extends Controller
     }
 
     /**
-     * Show the application landing page.
+     * Show the user's settings page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -51,7 +54,7 @@ class PageController extends Controller
 
 
     /**
-     * Show the admin dashboard.
+     * Show the admin dashboard page.
      *
      * @return \Illuminate\Http\Response
      */
@@ -60,4 +63,12 @@ class PageController extends Controller
         return view('pages.dashboard');
     }
 
+
+    protected function resourceAbilityMap()
+    {
+         return [
+            'settings'  => 'updatePassword',
+            'dashboard'  => 'access',
+        ];
+    }
 }

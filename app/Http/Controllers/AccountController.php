@@ -16,6 +16,9 @@ class AccountController extends Controller
     {
         //Authenticate
         $this->middleware('auth')->only('show');
+
+        //Authorize
+        $this->authorizeResource(User::class);
     }
 
     /**
@@ -153,5 +156,18 @@ class AccountController extends Controller
         $user->delete();
 
         return back();
+    }
+
+    protected function resourceAbilityMap()
+    {
+         return [
+            'index' => 'access',
+            'create' => 'access',
+            'store' => 'access',
+            'edit' => 'access',
+            'update' => 'access',
+            'delete' => 'access',
+            'updatePassword'  => 'updatePassword',
+        ];
     }
 }

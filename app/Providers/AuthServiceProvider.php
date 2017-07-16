@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\User' => 'App\Policies\UserPolicy',
+        'App\User' => 'App\Policies\AccountPolicy',
     ];
 
     /**
@@ -28,7 +28,10 @@ class AuthServiceProvider extends ServiceProvider
         // The user has all permissions
         Gate::before(function($user)
         {
-            return $user->isSuperAdmin();
+            if ($user->isSuperAdmin())
+            {
+                return true;
+            }
         });
     }
 }

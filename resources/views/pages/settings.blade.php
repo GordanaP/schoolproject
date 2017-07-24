@@ -45,10 +45,10 @@
                     account
                 @endslot
 
-{{--                 @slot('status')
+                @slot('status')
                     active
                 @endslot
- --}}
+
                 @slot('form')
                     @include('accounts.partials._formUpdatePassword')
                 @endslot
@@ -57,11 +57,6 @@
             @component('pages.partials.settings._tabPane')
                 @slot('id')
                     profile
-                @endslot
-
-                <!-- Temporary active -->
-                @slot('status')
-                    active
                 @endslot
 
                 @slot('form')

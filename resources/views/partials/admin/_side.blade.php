@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <li><a href="#">One more nav</a></li>
+    <li><a href="{{ route('profiles.index') }}">Profiles</a></li>
     <li><a href="#">Another nav item</a></li>
     <li><a href="#">More navigation</a></li>
 

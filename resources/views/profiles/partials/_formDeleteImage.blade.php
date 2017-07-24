@@ -1,4 +1,4 @@
-<form action="{{ route('profiles.destroy.file', $user->name) }}" method="POST">
+<form action="{{ route('profiles.destroy', $user->name) }}" method="POST">
 
     {{ csrf_field() }}
     {{ method_field('DELETE') }}

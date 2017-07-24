@@ -25,7 +25,7 @@ class ProfileRequest extends FormRequest
     {
         return [
             'image' => 'nullable|file|mimes:jpg,jpeg,png,gif',
-            'about' => 'required|max:300',
+            'about' => 'present|max:300',
         ];
     }
 }

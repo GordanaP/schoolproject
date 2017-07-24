@@ -19,8 +19,7 @@ Route::name('accounts.update.password')->patch('/accounts/{user}/password', 'Acc
 
 // Profile
 Route::resource('profiles', 'ProfileController', [
-    'except' => ['store', 'destroy'],
+    'except' => ['create','store'],
     'parameters' => ['profiles' => 'user']
 ]);
 Route::name('profiles.show.file')->get('profiles/avatar/{user}', 'ProfileController@showFile');
-Route::name('profiles.destroy.file')->delete('profiles/avatar/{user}', 'ProfileController@destroyFile');

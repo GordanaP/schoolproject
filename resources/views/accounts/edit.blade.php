@@ -18,7 +18,7 @@
             @slot('heading')
                 <h2>
                     <i class="fa fa-pencil-square-o"></i> Edit account
-                    <a href="#" class="btn btn-default btn-sm pull-right text-uppercase">
+                    <a href="{{ route('profiles.edit', $user) }}" class="btn btn-default btn-sm pull-right text-uppercase">
                        <i class="icon_profile"></i> View profile
                     </a>
                 </h2>

@@ -9,6 +9,15 @@ use Storage;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        //Authenticate
+        $this->middleware('auth')->only('show');
+
+        //Authorize
+        $this->authorizeResource(User::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,15 +28,6 @@ class ProfileController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -48,7 +48,7 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('profiles.edit', compact('user'));
     }
 
     /**
@@ -85,7 +85,7 @@ class ProfileController extends Controller
     }
 
 
-        /**
+    /**
      * Display the image of the specified resource.
      *
      * @param  \App\Profile  $profile
@@ -98,14 +98,13 @@ class ProfileController extends Controller
         return $file;
     }
 
-
     /**
      * Remove the image of the specified resource from storage.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroyFile(User $user)
+    public function destroy(User $user)
     {
         if (Storage::disk('profiles')->has(filename($user->id, 'profile')))
         {
@@ -114,5 +113,16 @@ class ProfileController extends Controller
 
         Notify::flash('The profile image has been deleted.', 'success');
         return back();
+    }
+
+    protected function resourceAbilityMap()
+    {
+         return [
+            'index' => 'access',
+            'edit' => 'access',
+            'update' => 'updateAccount',
+            'showFile' => 'updateAccount',
+            'destroy'  => 'updateAccount',
+        ];
     }
 }

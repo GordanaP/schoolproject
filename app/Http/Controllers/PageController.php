@@ -69,7 +69,7 @@ class PageController extends Controller
     protected function resourceAbilityMap()
     {
          return [
-            'settings'  => 'updatePassword',
+            'settings'  => 'updateAccount',
             'dashboard'  => 'access',
         ];
     }

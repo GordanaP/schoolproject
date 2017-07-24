@@ -159,8 +159,8 @@ class AccountController extends Controller
             'store' => 'access',
             'edit' => 'access',
             'update' => 'access',
-            'delete' => 'access',
-            'updatePassword'  => 'updatePassword',
+            'updatePassword'  => 'updateAccount',
+            'destroy' => 'access',
         ];
     }
 }

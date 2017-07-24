@@ -27,8 +27,9 @@ class AccountPolicy
      * @param  \App\User  $user [authenticated user]
      * @return mixed
      */
-    public function updatePassword(User $account, User $user)
+    public function updateAccount(User $account, User $user)
     {
         return $user->me($account);
     }
+
 }

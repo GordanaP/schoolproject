@@ -32,7 +32,7 @@
 
             <!-- Name -->
             <td width="300px">
-                <a href="#">
+                <a href="{{ route('profiles.edit', $user) }}">
                     {{ $user->name }}
                 </a>
             </td>

@@ -20,8 +20,12 @@ function selected($selected, $current)
     return $selected == $current ? 'selected' : '';
 }
 
-
 function checked($checked, $current)
 {
     return $checked == $current ? 'checked' : '';
+}
+
+function filename($id, $name)
+{
+    return $id.'-'.$name.'.jpg';
 }

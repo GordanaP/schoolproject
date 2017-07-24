@@ -45,10 +45,10 @@
                     account
                 @endslot
 
-                @slot('status')
+{{--                 @slot('status')
                     active
                 @endslot
-
+ --}}
                 @slot('form')
                     @include('accounts.partials._formUpdatePassword')
                 @endslot
@@ -59,13 +59,31 @@
                     profile
                 @endslot
 
+                <!-- Temporary active -->
+                @slot('status')
+                    active
+                @endslot
+
                 @slot('form')
-                   Profile update form
+                    <div class="well__profile">
+                        <div class="row">
+
+                            <!-- Image -->
+                            <div class="col-md-3 well__profile-thumbnail">
+                                @include('profiles.partials._image')
+                            </div>
+
+                            <!-- Update profile -->
+                            <div class="col-md-9 well__profile-form">
+                                @include('profiles.partials._formUpdate')
+                            </div>
+
+                        </div>
+                    </div>
                 @endslot
             @endcomponent
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
@@ -73,13 +91,13 @@
     <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script>
 
     <script>
-    @if (Notify::ready())
+        @if (Notify::ready())
             swal({
                 title: "{{ notify()->message() }}",
                 type : "{{ notify()->type() }}",
                 timer: 3000
             });
-    @endif
+        @endif
 
     </script>
 @endsection

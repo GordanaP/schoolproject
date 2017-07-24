@@ -1,9 +1,9 @@
 <?php
 
-//Auth
+// Auth
 Auth::routes();
 
-//Page
+// Page
 Route::as('pages.')->group(function(){
     Route::name('welcome')->get('/', 'PageController@welcome');
     Route::name('home')->get('/home', 'PageController@home');
@@ -11,8 +11,16 @@ Route::as('pages.')->group(function(){
     Route::name('dashboard')->get('/dashboard', 'PageController@dashboard');
 });
 
-//Account
+// Account
 Route::resource('accounts', 'AccountController', [
     'parameters' => ['accounts' => 'user']
 ]);
 Route::name('accounts.update.password')->patch('/accounts/{user}/password', 'AccountController@updatePassword');
+
+// Profile
+Route::resource('profiles', 'ProfileController', [
+    'except' => ['store', 'destroy'],
+    'parameters' => ['profiles' => 'user']
+]);
+Route::name('profiles.show.file')->get('profiles/avatar/{user}', 'ProfileController@showFile');
+Route::name('profiles.destroy.file')->delete('profiles/avatar/{user}', 'ProfileController@destroyFile');

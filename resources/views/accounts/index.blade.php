@@ -36,7 +36,8 @@
 
     <script>
 
-        $('#adminTable').DataTable();
+        // Initialize DataTable
+        $('#displayAccounts').DataTable();
 
     </script>
 @endsection

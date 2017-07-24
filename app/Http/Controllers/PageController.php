@@ -49,7 +49,9 @@ class PageController extends Controller
      */
     public function settings(User $user)
     {
-        return view('pages.settings', compact('user'));
+        return view('pages.settings')->with([
+            'user' => $user->load('roles')
+        ]);
     }
 
 

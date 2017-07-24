@@ -15,6 +15,11 @@ class Student extends Model
         static::observe(\App\Observers\StudentObserver::class);
     }
 
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' .ucfirst($this->last_name);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

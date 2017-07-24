@@ -8394,3 +8394,19 @@ fieldset[disabled] .form-control {
   border: 40px double #fff !important;
 }
 
+.settings-tabs .tab-content .well__profile .thumbnail {
+  border-radius: 50%;
+}
+
+.settings-tabs .tab-content .well__profile .thumbnail img {
+  background: #e8f7fd;
+}
+
+.settings-tabs .tab-content .well__profile .well__profile-form {
+  padding-left: 35px;
+}
+
+.settings-tabs .tab-content .well__profile .well__profile-form .btn-block {
+  margin-top: 1px;
+}
+

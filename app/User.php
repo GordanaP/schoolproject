@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Role;
 use App\User;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -27,6 +28,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
 
     public function getRouteKeyName()
     {
@@ -94,6 +96,26 @@ class User extends Authenticatable
     public function me($user)
     {
         return $this->id === $user->id;
+    }
+
+    public function assignRole($role)
+    {
+        $this->roles()->attach($role);
+    }
+
+    public function createProfile($role, $fields)
+    {
+        $roles = Role::whereIn('id', $role)->pluck('name')->toArray();
+
+        if(in_array('teacher', $roles))
+        {
+            $this->teacher()->create($fields);
+        }
+
+        if(in_array('student', $roles))
+        {
+            $this->student()->create($fields);
+        }
     }
 
 }

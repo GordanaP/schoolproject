@@ -51,6 +51,7 @@ class AccountController extends Controller
      */
     public function store(AccountRequest $request)
     {
+        // Create user
         $a = random_int(1000, 9999);
         $b = random_int(10, 99);
 
@@ -63,19 +64,11 @@ class AccountController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        $user->roles()->attach($request->role_id);
+        // Assign role
+        $user->assignRole($request->role_id);
 
-        $roles = Role::whereIn('id', $request->role_id)->pluck('name')->toArray();
-
-        if(in_array('teacher', $roles))
-        {
-            $user->teacher()->create($request->all());
-        }
-
-        if(in_array('student', $roles))
-        {
-            $user->student()->create($request->all());
-        }
+        // Create profile
+        $user->createProfile($request->role_id, $request->all());
 
         return back()
             ->with('flash', 'A new account has been created.');
@@ -155,7 +148,7 @@ class AccountController extends Controller
     {
         $user->delete();
 
-        return back();
+        return back()->with('flash', 'The account has been deleted.');
     }
 
     protected function resourceAbilityMap()

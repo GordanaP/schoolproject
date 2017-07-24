@@ -1,4 +1,4 @@
-<table class="table admin__table" id="adminTable">
+<table class="table admin__table" id="displayAccounts">
 
     <thead>
         <th class="text-center" width="100px">
@@ -10,10 +10,10 @@
     </thead>
 
     <tbody>
-        @foreach ($users as $user)
+        @forelse ($users as $user)
         <tr>
+            <!-- Action buttons -->
             <td class="text-center flex justify-center"  width="100px">
-
                 <a href="{{ route('accounts.edit', $user) }}" class="btn btn-warning btn-sm">
                     <i class="fa fa-pencil-square-o"></i>
                 </a>
@@ -28,21 +28,29 @@
                     </button>
 
                 </form>
-
             </td>
+
+            <!-- Name -->
             <td width="300px">
                 <a href="#">
                     {{ $user->name }}
                 </a>
             </td>
+
+            <!-- Email -->
             <td>{{ $user->email }}</td>
+
+            <!-- Roles -->
             <td>
                 @foreach ($user->roles as $role)
                     {{ $role->name }}
                 @endforeach
             </td>
         </tr>
-        @endforeach
+        @empty
+            There are no users at this time.
+        @endforelse
     </tbody>
 
 </table>
+

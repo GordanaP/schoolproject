@@ -28,6 +28,4 @@ class Role extends Model
     {
         return ucfirst($this->name);
     }
-
-
 }

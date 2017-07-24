@@ -43,8 +43,26 @@ body { font-family: 'Roboto Slab', serif;}
             background: #f3f8ec !important;
             border-radius: 0 !important;
             border: 40px double #fff !important;
+
+            &__profile .thumbnail {
+                border-radius: 50%;
+            }
+
+            &__profile .thumbnail img{
+                background: #e8f7fd;
+            }
+
+            &__profile .well__profile-form {
+                padding-left: 35px;
+
+                & .btn-block {
+                    margin-top: 1px;
+                }
+            }
+
         }
     }
 }
+
 
 

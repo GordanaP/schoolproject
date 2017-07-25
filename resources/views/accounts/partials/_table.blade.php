@@ -1,4 +1,4 @@
-<table class="table admin__table" id="displayAccounts">
+<table class="table admin__table" id="tableAccounts">
 
     <thead>
         <th class="text-center" width="100px">

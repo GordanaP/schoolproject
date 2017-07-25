@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
+use App\Student;
+use App\Teacher;
 use App\User;
 use Codecourse\Notify\Facades\Notify;
 use Storage;
@@ -23,9 +25,24 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function teachersIndex()
     {
-        //
+        $teachers = Teacher::all();
+
+        return view('profiles.teachers_index', compact('teachers'));
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function studentsIndex()
+    {
+        $students = Student::all();
+
+        return view('profiles.students_index', compact('students'));
     }
 
 
@@ -118,7 +135,8 @@ class ProfileController extends Controller
     protected function resourceAbilityMap()
     {
          return [
-            'index' => 'access',
+            'teachersIndex' => 'access',
+            'studentsIndex' => 'access',
             'edit' => 'access',
             'update' => 'updateAccount',
             'showFile' => 'updateAccount',

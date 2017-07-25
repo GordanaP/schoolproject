@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-
     @component('partials.admin._breadcrumb')
     @endcomponent
 
@@ -25,30 +24,23 @@
             @endslot
 
             @slot('body')
-                <form action="{{ route('profiles.update', $user) }}" method="POST" enctype="multipart/form-data"
-                    data-parsley-validate=""
-                    data-parsley-trigger="keyup"
-                    data-parsley-validation-threshold="1"
-                >
+                <p class="required__fields"> Fields marked with * are required. </p>
 
-                    {{ csrf_field() }}
-                    {{ method_field('PUT') }}
-
-                    <div class="row">
-                        <div class="col-md-3">
-                            @include('profiles.partials._image')
-                        </div>
-                        <div class="col-md-9">
-                            @include('profiles.partials._formUpdate')
-                        </div>
+                <div class="row">
+                    <!-- Image -->
+                    <div class="col-md-3">
+                        @include('profiles.partials._image')
                     </div>
-                </form>
+
+                    <!-- Update profile -->
+                    <div class="col-md-9">
+                        @include('profiles.partials._formUpdate')
+                    </div>
+                </div>
             @endslot
         @endcomponent
     </div>
-
 @endsection
-
 
 @section('scripts')
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>

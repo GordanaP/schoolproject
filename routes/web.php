@@ -18,8 +18,11 @@ Route::resource('accounts', 'AccountController', [
 Route::name('accounts.update.password')->patch('/accounts/{user}/password', 'AccountController@updatePassword');
 
 // Profile
+Route::name('profiles.teachers.index')->get('profiles/teachers', 'ProfileController@teachersIndex');
+Route::name('profiles.students.index')->get('profiles/students', 'ProfileController@studentsIndex');
 Route::resource('profiles', 'ProfileController', [
     'except' => ['create','store'],
-    'parameters' => ['profiles' => 'user']
+    'parameters' => ['profiles' => 'user'],
+    'names' => ['destroy' => 'profiles.destroy.file'],
 ]);
 Route::name('profiles.show.file')->get('profiles/avatar/{user}', 'ProfileController@showFile');

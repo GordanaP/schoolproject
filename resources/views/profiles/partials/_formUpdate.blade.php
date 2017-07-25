@@ -1,16 +1,21 @@
-<form action="{{ route('profiles.update', $user) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('profiles.update', $user) }}" method="POST" enctype="multipart/form-data"
+    data-parsley-validate=""
+    data-parsley-trigger="keyup"
+    data-parsley-validation-threshold="1"
+>
 
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
 
     <!-- Image -->
     <div class="form-group">
-        <input type="file" name="image">
+        <label>Upload Image</label>
+        <input type="file" name="image" id="image">
     </div>
 
+    <!-- About -->
     <div class="form-group">
-
-        <!-- About -->
+        <label for="about">About you</label>
         <textarea name="about" id="about" rows="5" placeholder="Introduce yourself to the the community in less than 300 characters" class="form-control"
             autofocus
             data-parsley-maxlength="300"

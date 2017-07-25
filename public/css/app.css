@@ -8414,3 +8414,7 @@ fieldset[disabled] .form-control {
   margin-top: 1px;
 }
 
+.admin__panel .thumbnail {
+  border-radius: 50%;
+}
+

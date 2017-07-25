@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', '| Adm | Accounts')
+@section('title', '| Adm | Students')
 
 @section('links')
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
@@ -12,21 +12,18 @@
 
     @component('partials.admin._panel')
         @slot('heading')
-
             <h2>
                 <img src="{{ asset('images/menu-icon.svg') }}" alt="" width="3%">
-                All accounts
-                <a href="{{ route('accounts.create') }}" class="btn btn-default btn-sm pull-right text-uppercase">
-                    <i class="icon_plus_alt2"></i> Add Account
+                All students
+
+                <a href="{{ route('profiles.teachers.index') }}" class="btn btn-default btn-sm pull-right text-uppercase">
+                    <i class="fa fa-bars" aria-hidden="true"></i> All teachers
                 </a>
             </h2>
-
         @endslot
 
         @slot('body')
-
-            @include('accounts.partials._table')
-
+            @include('profiles.partials._tableStudents')
         @endslot
     @endcomponent
 @endsection
@@ -37,7 +34,7 @@
     <script>
 
         // Initialize DataTable
-        $('#tableAccounts').DataTable();
+        $('#tableStudents').DataTable();
 
     </script>
 @endsection

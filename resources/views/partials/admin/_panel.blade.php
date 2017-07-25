@@ -8,10 +8,6 @@
 
     <div class="panel-body">
 
-        @if (Request::segment(2) != '')
-            <p class="required__fields"> Fields marked with * are required. </p>
-        @endif
-
         {{ $body }}
 
     </div>

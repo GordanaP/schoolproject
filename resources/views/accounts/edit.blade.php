@@ -25,6 +25,8 @@
             @endslot
 
             @slot('body')
+                <p class="required__fields"> Fields marked with * are required. </p>
+
                 <form action="{{ route('accounts.update', $user) }}" method="POST" class="form-horizontal"
                     data-parsley-validate=""
                     data-parsley-trigger="keyup"

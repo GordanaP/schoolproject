@@ -10,4 +10,5 @@ class TeacherObserver
     {
         $teacher->slug = strtolower($teacher->first_name) . '-' . strtolower($teacher->last_name) . '-' . random_int(10, 99);
     }
+
 }

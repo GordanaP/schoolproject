@@ -27,7 +27,7 @@ class ProfileController extends Controller
      */
     public function teachersIndex()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::with('user')->get();
 
         return view('profiles.teachers_index', compact('teachers'));
     }
@@ -40,7 +40,7 @@ class ProfileController extends Controller
      */
     public function studentsIndex()
     {
-        $students = Student::all();
+        $students = Student::with('user')->get();
 
         return view('profiles.students_index', compact('students'));
     }
@@ -77,19 +77,55 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, User $user)
     {
-        // Update profile
+        $a = random_int(1000, 9999);
+        $b = random_int(10, 99);
+
+        $name = name($request->first_name, $request->last_name, $a);
+        $email = email($request->first_name, $request->last_name, $b);
+        $slug = slug($request->first_name, $request->last_name, $b);
+
+        if($user->isStudent())
+        {
+            // Update account
+            if($request->first_name != $user->student->first_name || $request->last_name != $user->student->last_name)
+            {
+                $user->update([
+                    'name' => $name,
+                    'email' => $email,
+                ]);
+            }
+
+            // Update profile
+            $user->student()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'slug' => $slug,
+                'about' => $request->about
+            ]);
+        }
+
         if ($user->isTeacher())
         {
+            if($request->first_name != $user->teacher->first_name || $request->last_name != $user->teacher->last_name)
+            {
+                // Update account
+                $user->update([
+                    'name' => $name,
+                    'email' => $email,
+                ]);
+            }
+
+            // Update profile
             $user->teacher()->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'slug' => $slug,
                 'about' => $request->about
             ]);
         }
-        elseif($user->isStudent())
-        {
-            $user->student()->update([
-                'about' => $request->about
-            ]);
-        }
+
+        // Update role
+        $user->roles()->sync($request->role_id);
 
         // Update image
         if ($file = $request->file('image'))
@@ -98,7 +134,7 @@ class ProfileController extends Controller
         }
 
         Notify::flash('The profile has been updated.', 'success');
-        return back();
+        return redirect()->route('profiles.edit', $user);
     }
 
 

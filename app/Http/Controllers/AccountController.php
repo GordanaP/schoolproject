@@ -51,13 +51,13 @@ class AccountController extends Controller
      */
     public function store(AccountRequest $request)
     {
-        // Create user
         $a = random_int(1000, 9999);
         $b = random_int(10, 99);
 
         $name = name($request->first_name, $request->last_name, $a);
         $email = email($request->first_name, $request->last_name, $b);
 
+        // Create user
         $user = User::create([
             'name' => $name,
             'email' => $email,

@@ -14,6 +14,11 @@ function email($f_name, $l_name, $n)
     return strtolower($f_name) .'.'. strtolower($l_name) . $n . '@laraschool.com';
 }
 
+function slug($f_name, $l_name, $n)
+{
+    return strtolower($f_name) . '-' . strtolower($l_name) . '-' . $n;
+}
+
 
 function selected($selected, $current)
 {

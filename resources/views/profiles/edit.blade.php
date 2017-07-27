@@ -25,7 +25,6 @@
 
             @slot('body')
                 <p class="required__fields"> Fields marked with * are required. </p>
-
                 <div class="row">
                     <!-- Image -->
                     <div class="col-md-3">

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Classroom;
 use App\Http\Requests\ProfileRequest;
+use App\Role;
 use App\Student;
+use App\Subject;
 use App\Teacher;
 use App\User;
 use Codecourse\Notify\Facades\Notify;
@@ -31,7 +34,6 @@ class ProfileController extends Controller
 
         return view('profiles.teachers_index', compact('teachers'));
     }
-
 
     /**
      * Display a listing of the resource.
@@ -65,7 +67,11 @@ class ProfileController extends Controller
      */
     public function edit(User $user)
     {
-        return view('profiles.edit', compact('user'));
+        $roles = Role::all();
+        $subjects = Subject::orderBy('name', 'asc')->get();
+        $classrooms = Classroom::orderBy('label', 'asc')->get();
+
+        return view('profiles.edit', compact('user', 'roles', 'subjects', 'classrooms'));
     }
 
     /**
@@ -77,21 +83,19 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, User $user)
     {
-        $a = random_int(1000, 9999);
-        $b = random_int(10, 99);
+        //$teacher = Teacher::where('user_id', $user->id)->first() ;
 
-        $name = name($request->first_name, $request->last_name, $a);
-        $email = email($request->first_name, $request->last_name, $b);
-        $slug = slug($request->first_name, $request->last_name, $b);
-
+        /*STUDENT*/
         if($user->isStudent())
         {
             // Update account
             if($request->first_name != $user->student->first_name || $request->last_name != $user->student->last_name)
             {
                 $user->update([
-                    'name' => $name,
-                    'email' => $email,
+                    'name' => slug($request->first_name, $request->last_name),
+                    'username' => username($request->first_name, $request->last_name),
+                    'email' => email($request->first_name, $request->last_name),
+                    'password' => bcrypt(password($request->first_name, $request->last_name, $request->dob))
                 ]);
             }
 
@@ -99,19 +103,23 @@ class ProfileController extends Controller
             $user->student()->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'slug' => $slug,
-                'about' => $request->about
+                'about' => $request->about,
+                'dob' => $request->dob,
+                'cwid' => $user->username
             ]);
         }
 
+        /*TEACHER*/
         if ($user->isTeacher())
         {
             if($request->first_name != $user->teacher->first_name || $request->last_name != $user->teacher->last_name)
             {
                 // Update account
                 $user->update([
-                    'name' => $name,
-                    'email' => $email,
+                    'name' => slug($request->first_name, $request->last_name),
+                    'username' => username($request->first_name, $request->last_name),
+                    'email' => email($request->first_name, $request->last_name),
+                    'password' => bcrypt(password($request->first_name, $request->last_name, $request->dob))
                 ]);
             }
 
@@ -119,9 +127,32 @@ class ProfileController extends Controller
             $user->teacher()->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'slug' => $slug,
-                'about' => $request->about
+                'about' => $request->about,
+                'dob' => $request->dob,
+                'cwid' => $user->username
             ]);
+
+            //Update subjects & classrooms
+            $teacher = Teacher::where('user_id', $user->id)->first() ;
+            $classrooms = Classroom::whereIn('id', $request->classroom_id)->get();
+
+
+                // if (! $teacher->classrooms()->where('subject_id', $request->subject_id)->count() > 0)
+                // {
+                //     foreach ($request->classroom_id as $classroom_id)
+                //     {
+                //         $teacher->classrooms()->attach($classroom_id, [
+                //             'subject_id' => $request->subject_id,
+                //         ]);
+                //     }
+                // }
+                // else
+                // {
+                    foreach ($request->classroom_id as $classroom_id)
+                    {
+                        $teacher->classrooms()->updateExistingPivot($classroom_id, ['subject_id' => [$request->subject_id]]);
+                    }
+                // }
         }
 
         // Update role
@@ -133,8 +164,8 @@ class ProfileController extends Controller
             $file->storeAs('profiles', filename($user->id, 'profile'));
         }
 
-        Notify::flash('The profile has been updated.', 'success');
-        return redirect()->route('profiles.edit', $user);
+        return redirect()->route('profiles.edit', $user)
+            ->with('flash', 'The profile has been updated.');;
     }
 
 
@@ -174,7 +205,7 @@ class ProfileController extends Controller
             'teachersIndex' => 'access',
             'studentsIndex' => 'access',
             'edit' => 'access',
-            'update' => 'updateAccount',
+            'update' => 'access',
             'showFile' => 'updateAccount',
             'destroy'  => 'updateAccount',
         ];

@@ -9,6 +9,7 @@ use App\Student;
 use App\Teacher;
 use App\User;
 use Codecourse\Notify\Facades\Notify;
+use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
 {
@@ -40,7 +41,9 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('accounts.create');
+        $roles = Role::all();
+
+        return view('accounts.create', compact('roles'));
     }
 
     /**
@@ -51,24 +54,14 @@ class AccountController extends Controller
      */
     public function store(AccountRequest $request)
     {
-        $a = random_int(1000, 9999);
-        $b = random_int(10, 99);
-
-        $name = name($request->first_name, $request->last_name, $a);
-        $email = email($request->first_name, $request->last_name, $b);
-
-        // Create user
-        $user = User::create([
-            'name' => $name,
-            'email' => $email,
-            'password' => bcrypt($request->password)
-        ]);
+        // Create account
+        $user = User::createAccount($request);
 
         // Assign role
         $user->assignRole($request->role_id);
 
         // Create profile
-        $user->createProfile($request->role_id, $request->all());
+        $user->createProfile($user, $request->role_id, $request->all());
 
         return back()
             ->with('flash', 'A new account has been created.');
@@ -80,6 +73,7 @@ class AccountController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
+
     public function show(User $user)
     {
         //
@@ -93,7 +87,9 @@ class AccountController extends Controller
      */
     public function edit(User $user)
     {
-        return view('accounts.edit', compact('user'));
+        $roles = Role::all();
+
+        return view('accounts.edit', compact('user', 'roles'));
     }
 
     /**
@@ -105,14 +101,14 @@ class AccountController extends Controller
      */
     public function update(AccountRequest $request, User $user)
     {
-        if (! $request->password == '')
-        {
-            $user->update([
-                'password' => bcrypt($request->password)
-            ]);
-        }
+        // Update account
+        $user->updateAccount($user, $request);
 
-        $user->roles()->sync($request->role_id);
+        // Update profile
+        $user->updateProfile($user, $request);
+
+        // Update role
+        $user->assignRole($request->role_id);
 
         return redirect()->route('accounts.edit', $user)
             ->with('flash', 'The account has been updated.');
@@ -146,6 +142,11 @@ class AccountController extends Controller
      */
     public function destroy(User $user)
     {
+        if (Storage::disk('profiles')->has(filename($user->id, 'profile')))
+        {
+            Storage::disk('profiles')->delete(filename($user->id, 'profile'));
+        }
+
         $user->delete();
 
         return back()->with('flash', 'The account has been deleted.');

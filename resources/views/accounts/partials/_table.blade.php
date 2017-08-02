@@ -5,7 +5,8 @@
             <i class="fa fa-cog"></i>
         </th>
         <th class="text-uppercase"  width="300px">Name</th>
-        <th class="text-uppercase">Email</th>
+        <th class="text-uppercase"  width="150px">Username</th>
+        <th class="text-uppercase" width="300px">Email</th>
         <th class="text-uppercase">Role</th>
     </thead>
 
@@ -32,10 +33,17 @@
 
             <!-- Name -->
             <td width="300px">
-                <a href="{{ route('profiles.edit', $user) }}">
+                @if (! $user->isSuperAdmin() )
+                    <a href="{{ route('profiles.edit', $user) }}">
+                        {{ $user->name }}
+                    </a>
+                @else
                     {{ $user->name }}
-                </a>
+                @endif
             </td>
+
+            <!-- Email -->
+            <td width="150px">{{ $user->username }}</td>
 
             <!-- Email -->
             <td>{{ $user->email }}</td>

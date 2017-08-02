@@ -21,6 +21,11 @@ p.admin__checkbox {margin: 10px}
 /*
  * Select 2 override
  */
+.select2-container{
+  display: inline-block;
+  width: 100% !important;
+}
+
 .select2-selection.select2-selection--multiple{ border-radius: 0px !important; border-color:#cccccc;}
 
 .select2-search__field{ padding: 5px 11px !important;}

@@ -17,13 +17,13 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $roles = Role::all();
-        $classes = Classroom::all();
-        $subjects = Subject::orderBy('name')->get();
+        // $roles = Role::all();
+        // $classes = Classroom::all();
+        // $subjects = Subject::orderBy('name')->get();
 
-        View::share('roles', $roles);
-        View::share('classes', $classes);
-        View::share('subjects', $subjects);
+        // View::share('roles', $roles);
+        // View::share('classes', $classes);
+        // View::share('subjects', $subjects);
     }
 
     /**

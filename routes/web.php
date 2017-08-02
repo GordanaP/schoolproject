@@ -26,3 +26,7 @@ Route::resource('profiles', 'ProfileController', [
     'names' => ['destroy' => 'profiles.destroy.file'],
 ]);
 Route::name('profiles.show.file')->get('profiles/avatar/{user}', 'ProfileController@showFile');
+
+
+Route::resource('teachers', 'TeacherController');
+Route::resource('students', 'StudentController');

@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'username'
     ];
 
     /**
@@ -100,10 +100,12 @@ class User extends Authenticatable
 
     public function assignRole($role)
     {
-        $this->roles()->attach($role);
+        $roles = Role::whereIn('id', $role)->get();
+
+        $this->hasRole($roles) ? $this->roles()->sync($role) : $this->roles()->attach($role);
     }
 
-    public function createProfile($role, $fields)
+    public function createProfile($user, $role, $fields)
     {
         $roles = Role::whereIn('id', $role)->pluck('name')->toArray();
 
@@ -114,8 +116,121 @@ class User extends Authenticatable
 
         if(in_array('student', $roles))
         {
-            $this->student()->create($fields);
+            $this->student()->create([
+                'first_name' => $fields['first_name'],
+                'last_name' => $fields['last_name'],
+                'dob' => $fields['dob'],
+                'cwid' => $user->username
+            ]);
         }
     }
 
+    public function fullname()
+    {
+        if ($this->isTeacher())
+        {
+            return fullname($this->teacher->first_name, $this->teacher->last_name);
+        }
+
+        if ($this->isStudent())
+        {
+            return fullname($this->student->first_name, $this->student->last_name);
+        }
+
+        if ($this->isSuperAdmin()) {
+           return $this->name;
+        }
+    }
+
+    public static function createAccount($fields)
+    {
+        return static::create([
+            'name' => slug($fields['first_name'], $fields['last_name']),
+            'username' => username($fields['first_name'], $fields['last_name']),
+            'email' => email($fields['first_name'], $fields['last_name']),
+            'password' => bcrypt(password($fields['first_name'], $fields['last_name'], $fields['dob']))
+        ]);
+    }
+
+    public function updateAccount($user, $fields)
+    {
+        $teacher = Role::where('name', 'teacher')->first();
+        $student = Role::where('name', 'student')->first();
+
+        if (in_array($teacher->id, $fields['role_id']))
+        {
+            $this->updateTeacherAccount($user, $fields);
+        }
+        else
+        {
+            $this->updateStudentAccount($user, $fields);
+        }
+    }
+
+    public function updateProfile($user, $fields)
+    {
+        if ($user->isTeacher())
+        {
+            $user->teacher()->update([
+                'first_name' => $fields['first_name'],
+                'last_name' => $fields['last_name'],
+                'dob' => $fields['dob'],
+                'cwid' => $user->username
+            ]);
+        }
+        else
+        {
+            $user->student()->update([
+                'first_name' => $fields['first_name'],
+                'last_name' => $fields['last_name'],
+                'dob' => $fields['dob'],
+                'cwid' => $user->username
+            ]);
+        }
+    }
+
+    public function updateTeacherAccount($user, $fields)
+    {
+        if ($fields['first_name'] != $user->teacher->first_name || $fields['last_name'] != $user->teacher->last_name)
+        {
+            $this->updateUser($user, $fields);
+        }
+        elseif($fields['first_name'] == $user->teacher->first_name && $fields['last_name'] == $user->teacher->last_name && $fields['dob'] != $user->teacher->dob)
+        {
+            $this->updatePassword($user, $fields);
+        }
+    }
+
+    public function updateStudentAccount($user, $fields)
+    {
+        if ($fields['first_name'] != $user->student->first_name || $fields['last_name'] != $user->student->last_name)
+        {
+            $this->updateUser($user, $fields);
+        }
+        elseif($fields['first_name'] == $user->student->first_name && $fields['last_name'] == $user->student->last_name && $fields['dob'] != $user->student->dob)
+        {
+            $this->updatePassword($user, $fields);
+        }
+    }
+
+    public function updateUser($user, $fields)
+    {
+        $first_name = $fields['first_name'];
+        $last_name = $fields['last_name'];
+        $dob = $fields['dob'];
+
+        $user->update([
+            'name' => slug($first_name, $last_name),
+            'username' => username($first_name, $last_name),
+            'email' => email($first_name, $last_name),
+            'password' => bcrypt(password($first_name, $last_name, $dob))
+        ]);
+    }
+
+    public function updatePassword($user, $fields)
+    {
+        $user->update([
+            'password' => bcrypt(password($fields['first_name'], $fields['last_name'], $fields['dob']))
+        ]);
+    }
 }

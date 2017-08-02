@@ -6,15 +6,11 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
-    $first = strtolower($faker->firstName);
-    $last = strtolower($faker->lastName);
-    $name = $first . '-' .$last;
-    $email = $first . '.' .$last.'@gmail.com';
-
     return [
-        'name' => $name,
-        'email' => $email,
-        'password' => $password ?: $password = bcrypt('123456'),
+        'name' => 'gordana-vlajkovic-1234',
+        'email' => 'gordana.vlajkovic12@gmail.com',
+        'username' => 'gov1234',
+        'password' => $password ?: $password = bcrypt('Gv570613'),
         'remember_token' => str_random(10),
     ];
 });
@@ -41,6 +37,7 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
+        'dob' => \Carbon\Carbon::parse($faker->dateTimeBetween($startDate = '-8 months', $endDate = 'now'))->subYears(18),
         'user_id' => function(){
             return factory(App\User::class)->create()->id;
         },
@@ -55,6 +52,7 @@ $factory->define(App\Teacher::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
+        'dob' => \Carbon\Carbon::parse($faker->dateTimeBetween($startDate = '-8 months', $endDate = 'now'))->subYears(25),
         'user_id' => function(){
             return factory(App\User::class)->create()->id;
         },

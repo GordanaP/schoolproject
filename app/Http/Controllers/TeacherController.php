@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Classroom;
+use App\Role;
+use App\Subject;
 use App\Teacher;
 use Illuminate\Http\Request;
 

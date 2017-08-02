@@ -8418,3 +8418,8 @@ fieldset[disabled] .form-control {
   border-radius: 50%;
 }
 
+.parsley-errors-list.filled {
+  color: red !important;
+  font-size: 12px;
+}
+

@@ -3,11 +3,14 @@
 namespace App\Observers;
 
 use App\Student;
+use App\User;
 
 class StudentObserver
 {
     public function creating(Student $student)
     {
-        $student->slug = strtolower($student->first_name) . '-' . strtolower($student->last_name) . '-' . random_int(100, 999);
+        $user = User::whereId($student->user_id)->first();
+
+        $student->cwid = $user->username;
     }
 }

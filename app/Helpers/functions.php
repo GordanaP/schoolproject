@@ -1,24 +1,57 @@
 <?php
 
-
-function name($f_name, $l_name, $n)
+function fullname($f_name, $l_name)
 {
-    $f_name_init = strtolower(substr($f_name, 0, 1));
-    $l_name_init = strtolower(substr($l_name, 0, 1));
-
-    return $f_name_init . $l_name_init .$n;
+    return ucfirst($f_name) . ' ' . ucfirst($l_name);
 }
 
-function email($f_name, $l_name, $n)
+function username($f_name, $l_name)
 {
+    $n = random_int(1000, 9999);
+    $f_name_init = strtolower(substr($f_name, 0, 2));
+    $l_name_init = strtolower(substr($l_name, 0, 1));
+
+    return $f_name_init . $l_name_init . $n;
+}
+
+function email($f_name, $l_name)
+{
+    $n = random_int(10, 99);
     return strtolower($f_name) .'.'. strtolower($l_name) . $n . '@laraschool.com';
 }
 
-function slug($f_name, $l_name, $n)
+function password($f_name, $l_name, $dob)
 {
-    return strtolower($f_name) . '-' . strtolower($l_name) . '-' . $n;
+    $f_name_init = ucfirst(substr($f_name, 0, 1));
+    $l_name_init = strtolower(substr($l_name, 0, 1));
+
+    $dt = \Carbon\Carbon::parse($dob);
+
+    $year = substr($dt->year, 2,2);
+
+    if (strlen($dt->month) == 1) {
+        $month = '0'.$dt->month;
+    }
+    else{
+        $month = $dt->month;
+    }
+
+    if (strlen($dt->day) == 1) {
+        $day = '0'.$dt->day;
+    }
+    else{
+        $day = $dt->day;
+    }
+
+    return $f_name_init . $l_name_init . $year . $month . $day;
 }
 
+function slug($f_name, $l_name)
+{
+    $n = random_int(1000, 9999);
+
+    return strtolower($f_name) . '-' . strtolower($l_name) . '-' . $n;
+}
 
 function selected($selected, $current)
 {

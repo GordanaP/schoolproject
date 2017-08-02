@@ -24,7 +24,8 @@ class CreateStudentsTable extends Migration
 
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('slug');
+            $table->string('cwid');
+            $table->timestamp('dob');
             $table->text('about')->nullable();
             $table->timestamps();
         });

@@ -3,8 +3,7 @@
 <head>
 
     @include('partials.top._head')
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+    @include('partials.admin._links')
 
     @yield('links')
 

@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    protected $fillable = ['first_name', 'last_name', 'about', 'classroom_id'];
+    protected $fillable = ['first_name', 'last_name', 'about', 'cwid', 'dob', 'classroom_id'];
+
+    protected $dates = ['dob'];
 
     protected static function boot()
     {
@@ -29,4 +31,6 @@ class Student extends Model
     {
         return $this->belongsTo(Classroom::class);
     }
+
+
 }

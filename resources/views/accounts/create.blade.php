@@ -8,7 +8,7 @@
 
 @section('content')
     <!-- Breadcrumb -->
-    @include('partials.admin._breadcrumb')
+    @component('partials.admin._breadcrumb') @endcomponent
 
     <!-- Errors -->
     @include('errors._list')
@@ -43,6 +43,7 @@
                         @include('accounts.partials._formCreate', [
                             'first_name' => old('first_name'),
                             'last_name' => old('last_name'),
+                            'dob' => old('dob'),
                             'ids' => old('role_id'),
                             'button' => 'Create account',
                         ])
@@ -56,15 +57,4 @@
 
 @section('scripts')
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
-
-    <script>
-        // Set random password
-        // <input type="text" id="password" onkeyup="setPassword()"
-        function setPassword()
-        {
-            var password = Math.random().toString(36).substring(8);
-
-            $('#password').val(password);
-        }
-    </script>
 @endsection

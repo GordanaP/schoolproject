@@ -20,4 +20,14 @@ class Subject extends Model
         return 'slug';
     }
 
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+
+    // public function teachers()
+    // {
+    //     return $this->belongsToMany(Teacher::class)->withPivot('classroom_id');
+    // }
+
 }

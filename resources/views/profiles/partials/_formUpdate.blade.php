@@ -1,4 +1,4 @@
-<form action="{{ route('profiles.update', $user) }}" method="POST" enctype="multipart/form-data"
+<form action="{{ route('profiles.update', $user) }}" method="POST" id="myForm" enctype="multipart/form-data"
     data-parsley-validate=""
     data-parsley-trigger="keyup"
     data-parsley-validation-threshold="1"
@@ -54,23 +54,43 @@
             />
         </div>
 
-        <!-- Subject -->
+        <!-- Birth date -->
+        <div class="form-group">
+            <label for="dob">Date of birth <span class="asterisk">*</span></label>
+            <input type="text" name="dob" id="dob" class="form-control" placeholder="yyyy-mm-dd" value="{{ $user->isTeacher() ? $user->teacher->dob->format('Y-m-d') : $user->student->dob->format('Y-m-d') }}"
+                data-parsley-required=""
+                data-parsley-required-message="The date of birth is required."
+            />
+        </div>
+
         @if ($user->isTeacher())
+            <!-- Subject -->
             <div class="form-group">
-                <label for="subject">Subject <span class="asterisk">*</span></label>
-                <select name="subject[]" id="subject" class="form-control" multiple
-                    {{-- data-parsley-required=""
-                    data-parsley-mincheck="1"
-                    data-parsley-required-message="The subject is required." --}}
-                >
-                    <option value="">History</option>
-                    <option value="">Biology</option>
-                    <option value="">mathematics</option>
+                <label for="subject">Subject</label>
+                <select name="subject_id" id="subject_id" class="form-control">
+                    <option disabled selected>Select a subject</option>
+                    @foreach ($subjects as $subject)
+                        <option value="{{ $subject->id }}">
+                            {{ $subject->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Classroom --}}
+            <div class="form-group">
+                <label for="classroom">Class</label>
+                <select name="classroom_id[]" id="classroom" multiple>
+                    @foreach ($classrooms as $classroom)
+                        <option value="{{ $classroom->id }}">
+                            {{ $classroom->label }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         @else
             <div class="form-group">
-                <label for="classroom_id">Classroom <span class="asterisk">*</span></label>
+                <label for="classroom_id">Class</label>
                 <select name="classroom_id" id="classroom_id" class="form-control">
                     <option selected disabled>Select a classroom</option>
                     <option value="">I1</option>

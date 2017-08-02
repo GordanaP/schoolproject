@@ -3,6 +3,7 @@
 @section('title', '| Admin | '.$user->name)
 
 @section('links')
+    <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/parsley/parsley.css') }}">
 @endsection
 
@@ -12,7 +13,7 @@
 
     @include('errors._list')
 
-    <div class="row col-md-8 col-md-offset-2">
+    <div class="row col-md-10 col-md-offset-1">
         @component('partials.admin._panel')
             @slot('heading')
                 <h2>
@@ -42,5 +43,10 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
+
+    <script>
+        $("#subject, #classroom").select2();
+    </script>
 @endsection

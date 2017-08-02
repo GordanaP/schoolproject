@@ -5,6 +5,8 @@
             <i class="fa fa-cog"></i>
         </th>
         <th class="text-uppercase">Name</th>
+        <th class="text-uppercase">Cwid</th>
+        <th class="text-uppercase">Date of birth</th>
         <th class="text-uppercase">Group</th>
     </thead>
 
@@ -24,6 +26,16 @@
                 <a href="{{ route('accounts.edit', $student->user->name) }}">
                     {{ $student->full_name }}
                 </a>
+            </td>
+
+            <!-- Cwid -->
+            <td>
+                {{ $student->cwid }}
+            </td>
+
+            <!-- Date of birth -->
+            <td>
+                {{ $student->dob->format('Y-m-d') }}
             </td>
 
             <!-- Subjects -->

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassroomTeacherTable extends Migration
+class CreateSubjectTeacherTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateClassroomTeacherTable extends Migration
      */
     public function up()
     {
-        Schema::create('classroom_teacher', function (Blueprint $table) {
+        Schema::create('subject_teacher', function (Blueprint $table) {
+            $table->increments('id');
+
             $table->unsignedInteger('teacher_id')->index();
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
 
-            $table->unsignedInteger('classroom_id')->index();
-            $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
+            $table->unsignedInteger('subject_id')->index();
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
 
-            $table->unsignedInteger('subject_id');
-
-            $table->unique(['teacher_id', 'classroom_id', 'subject_id']);
+            $table->unsignedInteger('classroom_id');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateClassroomTeacherTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classroom_teacher');
+        Schema::dropIfExists('subject_teacher');
     }
 }

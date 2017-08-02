@@ -144,12 +144,33 @@ class User extends Authenticatable
 
     public static function createAccount($fields)
     {
-        return static::create([
-            'name' => slug($fields['first_name'], $fields['last_name']),
-            'username' => username($fields['first_name'], $fields['last_name']),
-            'email' => email($fields['first_name'], $fields['last_name']),
-            'password' => bcrypt(password($fields['first_name'], $fields['last_name'], $fields['dob']))
-        ]);
+        $user = new static;
+
+        $user->username = username($fields['first_name'], $fields['last_name']);
+        $user->password = bcrypt(password($fields['first_name'], $fields['last_name'], $fields['dob']));
+        $user->name = slug($fields['first_name'], $fields['last_name']);
+        $user->email = email($fields['first_name'], $fields['last_name']);
+
+        $count = static::whereRaw("name REGEXP '^{$user->name}(-[0-9]*)?$'")->count();
+
+        if($count > 0)
+        {
+            $latestName = static::whereRaw("name REGEXP '^{$user->name}(-[0-9]*)?$'")
+                ->latest('id')
+                ->first()
+                ->pluck('name');
+
+            $pieces = explode('-', $latestName);
+
+            $number = intval(end($pieces));
+
+            $user->name .= '-' .($number + 1);
+            $user->email .= ($number + 1) . '@laraschool.com';
+        }
+
+        $user->save();
+
+        return $user;
     }
 
     public function updateAccount($user, $fields)

@@ -27,13 +27,13 @@ class Teacher extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function classrooms()
-    {
-        return $this->belongsToMany(Classroom::class)->withPivot('subject_id');
-    }
-
-    // public function subjects()
+    // public function classrooms()
     // {
-    //     return $this->belongsToMany(Subject::class)->withPivot('classroom_id');
+    //     return $this->belongsToMany(Classroom::class)->withPivot('subject_id');
     // }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class)->withPivot('classroom_id');
+    }
 }

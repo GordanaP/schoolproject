@@ -25,9 +25,9 @@ class Subject extends Model
         return ucwords($value);
     }
 
-    // public function teachers()
-    // {
-    //     return $this->belongsToMany(Teacher::class)->withPivot('classroom_id');
-    // }
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class)->withPivot('classroom_id');
+    }
 
 }

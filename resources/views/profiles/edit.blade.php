@@ -47,6 +47,12 @@
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
 
     <script>
-        $("#classroom").select2();
+        $("#subject").select2({
+            placeholder: 'Select subjects'
+        });
+
+        $("#classroom").select2({
+            placeholder: 'Select classrooms'
+        });
     </script>
 @endsection

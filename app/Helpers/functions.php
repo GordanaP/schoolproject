@@ -16,8 +16,7 @@ function username($f_name, $l_name)
 
 function email($f_name, $l_name)
 {
-    $n = random_int(10, 99);
-    return strtolower($f_name) .'.'. strtolower($l_name) . $n . '@laraschool.com';
+    return strtolower($f_name) .'.'. strtolower($l_name);
 }
 
 function password($f_name, $l_name, $dob)
@@ -48,9 +47,7 @@ function password($f_name, $l_name, $dob)
 
 function slug($f_name, $l_name)
 {
-    $n = random_int(1000, 9999);
-
-    return strtolower($f_name) . '-' . strtolower($l_name) . '-' . $n;
+    return str_slug($f_name . '-' . $l_name);
 }
 
 function selected($selected, $current)

@@ -52,8 +52,7 @@
             <!-- Subject -->
             <div class="form-group">
                 <label for="subject">Subject</label>
-                <select name="subject_id" id="subject_id" class="form-control">
-                    <option disabled selected>Select a subject</option>
+                <select name="subject_id[]" id="subject" class="form-control" multiple>
                     @foreach ($subjects as $subject)
                         <option value="{{ $subject->id }}">
                             {{ $subject->name }}

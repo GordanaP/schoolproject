@@ -103,21 +103,11 @@ class ProfileController extends Controller
             $teacher = Teacher::where('user_id', $user->id)->first() ;
             $classrooms = Classroom::whereIn('id', $request->classroom_id)->get();
 
-            if (! $teacher->classrooms()->where('subject_id', $request->subject_id)->count() > 0)
+            foreach ($request->classroom_id as $id)
             {
-                foreach ($request->classroom_id as $classroom_id)
-                {
-                    $teacher->classrooms()->attach($classroom_id, [
-                        'subject_id' => $request->subject_id,
-                    ]);
-                }
-            }
-            else
-            {
-                foreach ($request->classroom_id as $classroom_id)
-                {
-                    $teacher->classrooms()->updateExistingPivot($classroom_id, ['subject_id' => [$request->subject_id]]);
-                }
+                $teacher->subjects()->attach($request->subject_id, [
+                    'classroom_id' => $id,
+                ]);
             }
         }
 

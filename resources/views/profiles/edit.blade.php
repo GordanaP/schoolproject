@@ -47,6 +47,6 @@
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
 
     <script>
-        $("#subject, #classroom").select2();
+        $("#classroom").select2();
     </script>
 @endsection

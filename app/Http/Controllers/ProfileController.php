@@ -83,80 +83,43 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, User $user)
     {
-        //$teacher = Teacher::where('user_id', $user->id)->first() ;
-
-        /*STUDENT*/
+        // Student
         if($user->isStudent())
         {
-            // Update account
-            if($request->first_name != $user->student->first_name || $request->last_name != $user->student->last_name)
-            {
-                $user->update([
-                    'name' => slug($request->first_name, $request->last_name),
-                    'username' => username($request->first_name, $request->last_name),
-                    'email' => email($request->first_name, $request->last_name),
-                    'password' => bcrypt(password($request->first_name, $request->last_name, $request->dob))
-                ]);
-            }
-
-            // Update profile
             $user->student()->update([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
+                'classroom_id' => $request->classroom_id,
                 'about' => $request->about,
-                'dob' => $request->dob,
-                'cwid' => $user->username
             ]);
         }
 
-        /*TEACHER*/
+        // Teacher
         if ($user->isTeacher())
         {
-            if($request->first_name != $user->teacher->first_name || $request->last_name != $user->teacher->last_name)
-            {
-                // Update account
-                $user->update([
-                    'name' => slug($request->first_name, $request->last_name),
-                    'username' => username($request->first_name, $request->last_name),
-                    'email' => email($request->first_name, $request->last_name),
-                    'password' => bcrypt(password($request->first_name, $request->last_name, $request->dob))
-                ]);
-            }
-
-            // Update profile
             $user->teacher()->update([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
                 'about' => $request->about,
-                'dob' => $request->dob,
-                'cwid' => $user->username
             ]);
 
             //Update subjects & classrooms
             $teacher = Teacher::where('user_id', $user->id)->first() ;
             $classrooms = Classroom::whereIn('id', $request->classroom_id)->get();
 
-
-                // if (! $teacher->classrooms()->where('subject_id', $request->subject_id)->count() > 0)
-                // {
-                //     foreach ($request->classroom_id as $classroom_id)
-                //     {
-                //         $teacher->classrooms()->attach($classroom_id, [
-                //             'subject_id' => $request->subject_id,
-                //         ]);
-                //     }
-                // }
-                // else
-                // {
-                    foreach ($request->classroom_id as $classroom_id)
-                    {
-                        $teacher->classrooms()->updateExistingPivot($classroom_id, ['subject_id' => [$request->subject_id]]);
-                    }
-                // }
+            if (! $teacher->classrooms()->where('subject_id', $request->subject_id)->count() > 0)
+            {
+                foreach ($request->classroom_id as $classroom_id)
+                {
+                    $teacher->classrooms()->attach($classroom_id, [
+                        'subject_id' => $request->subject_id,
+                    ]);
+                }
+            }
+            else
+            {
+                foreach ($request->classroom_id as $classroom_id)
+                {
+                    $teacher->classrooms()->updateExistingPivot($classroom_id, ['subject_id' => [$request->subject_id]]);
+                }
+            }
         }
-
-        // Update role
-        $user->roles()->sync($request->role_id);
 
         // Update image
         if ($file = $request->file('image'))
@@ -165,7 +128,7 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('profiles.edit', $user)
-            ->with('flash', 'The profile has been updated.');;
+            ->with('flash', 'The profile has been updated.');
     }
 
 

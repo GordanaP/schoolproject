@@ -1,4 +1,4 @@
-<form action="{{ route('profiles.update', $user) }}" method="POST" id="myForm" enctype="multipart/form-data"
+<form action="{{ route('profiles.update', $user) }}" method="POST" enctype="multipart/form-data"
     data-parsley-validate=""
     data-parsley-trigger="keyup"
     data-parsley-validation-threshold="1"
@@ -7,16 +7,12 @@
     {{ csrf_field() }}
     {{ method_field('PUT') }}
 
-    @if (Request::is('profiles/*'))
-        <!-- Role -->
+    @can('access', $user)
         <div class="form-group">
-            <label for="role_id">Role <span class="asterisk">*</span></label>
+            <label>Role <span class="asterisk">*</span></label>
             <p class="admin__checkbox" id="#updateProfile" style="margin-left: 0;">
                 @foreach ($roles as $role)
-                    <input type="checkbox" name="role_id[]" id="role_id_{{ $role->id }}" value="{{ $role->id }}"
-                        data-parsley-required=""
-                        data-parsley-mincheck="1"
-                        data-parsley-required-message="The role is required."
+                    <input type="checkbox" value="{{ $role->id }}" disabled=""
                         @if (is_array($ids = $user->roles->pluck('id')->toArray()))
                             @foreach ($ids as $role_id)
                                 {{ checked($role->id, $role_id) }}
@@ -30,37 +26,26 @@
 
         <!-- First name -->
         <div class="form-group">
-            <label for="first_name">First Name <span class="asterisk">*</span></label>
-            <input type="text" name="first_name" id="first_name" class="form-control" value="{{ $user->isTeacher() ? $user->teacher->first_name : $user->student->first_name }}"
-                data-parsley-required=""
-                data-parsley-pattern="/^[a-zA-Z]*$/"
-                data-parsley-maxlength="50"
-                data-parsley-required-message="The first name is required"
-                data-parsley-pattern-message="The value is invalid. Only letters are allowed."
-                data-parsley-maxlength-message="The first name must be less than 50 characters long."
-            />
+            <label>First Name <span class="asterisk">*</span></label>
+            <input type="text" class="form-control" value="{{ $user->isTeacher() ? $user->teacher->first_name : $user->student->first_name }}" disabled="" />
         </div>
 
         <!-- Last name -->
         <div class="form-group">
-            <label for="last_name">Last Name <span class="asterisk">*</span></label>
-            <input type="text" name="last_name" id="last_name" class="form-control" value="{{ $user->isTeacher() ? $user->teacher->last_name : $user->student->last_name }}"
-                data-parsley-required=""
-                data-parsley-pattern="/^[a-zA-Z]*$/"
-                data-parsley-maxlength="50"
-                data-parsley-required-message="The last name is required"
-                data-parsley-pattern-message="The value is invalid. Only letters are allowed."
-                data-parsley-maxlength-message="The last name must be less than 50 characters long."
-            />
+            <label>Last Name <span class="asterisk">*</span></label>
+            <input type="text" class="form-control" value="{{ $user->isTeacher() ? $user->teacher->last_name : $user->student->last_name }}" disabled="" />
         </div>
 
         <!-- Birth date -->
         <div class="form-group">
-            <label for="dob">Date of birth <span class="asterisk">*</span></label>
-            <input type="text" name="dob" id="dob" class="form-control" placeholder="yyyy-mm-dd" value="{{ $user->isTeacher() ? $user->teacher->dob->format('Y-m-d') : $user->student->dob->format('Y-m-d') }}"
-                data-parsley-required=""
-                data-parsley-required-message="The date of birth is required."
-            />
+            <label>Date of birth <span class="asterisk">*</span></label>
+            <input type="text" id="dob" class="form-control" value="{{ $user->isTeacher() ? $user->teacher->dob->format('Y-m-d') : $user->student->dob->format('Y-m-d') }}" disabled="" />
+        </div>
+
+        <!-- CWID -->
+        <div class="form-group">
+            <label>CWID <span class="asterisk">*</span></label>
+            <input type="text" class="form-control" value="{{ $user->isTeacher() ? $user->teacher->cwid : $user->student->cwid}}" disabled="" />
         </div>
 
         @if ($user->isTeacher())
@@ -77,7 +62,7 @@
                 </select>
             </div>
 
-            {{-- Classroom --}}
+            <!-- Classroom -->
             <div class="form-group">
                 <label for="classroom">Class</label>
                 <select name="classroom_id[]" id="classroom" multiple>
@@ -93,12 +78,17 @@
                 <label for="classroom_id">Class</label>
                 <select name="classroom_id" id="classroom_id" class="form-control">
                     <option selected disabled>Select a classroom</option>
-                    <option value="">I1</option>
-                    <option value="">I2</option>
+                    @foreach ($classrooms as $classroom)
+                        <option value="{{ $classroom->id }}"
+                            {{ selected($classroom->id, $user->student->classroom_id) }}
+                        >
+                            {{ $classroom->label }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         @endif
-    @endif
+    @endcan
 
     <!-- Image -->
     <div class="form-group">

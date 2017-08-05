@@ -1,3 +1,5 @@
+@if (count($teachers))
+
 <table class="table admin__table" id="tableTeachers">
 
     <thead>
@@ -11,7 +13,7 @@
     </thead>
 
     <tbody>
-        @forelse ($teachers as $teacher)
+        @foreach ($teachers as $teacher)
         <tr>
             <!-- Action buttons -->
             <td class="text-center flex justify-center"  width="100px">
@@ -43,10 +45,11 @@
                 Biology, history
             </td>
         </tr>
-        @empty
-            There are no teachers at this time.
-        @endforelse
+        @endforeach
     </tbody>
 
 </table>
 
+@else
+    There are no teachers as present.
+@endif

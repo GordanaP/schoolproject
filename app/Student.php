@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-    protected $fillable = ['first_name', 'last_name', 'about', 'cwid', 'dob', 'classroom_id'];
+    protected $fillable = [
+        'cwid', 'first_name', 'last_name', 'gender', 'parent', 'dob', 'birthplace', 'about', 'classroom_id'
+    ];
 
     protected $dates = ['dob'];
 
@@ -15,6 +17,11 @@ class Student extends Model
         parent::boot();
 
         static::observe(\App\Observers\StudentObserver::class);
+    }
+
+    public function getNameAttribute()
+    {
+       return ucfirst($this->first_name);
     }
 
     public function getFullNameAttribute()

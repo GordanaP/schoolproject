@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <!-- Breadcrumb -->
     @component('partials.admin._breadcrumb') @endcomponent
 
@@ -56,6 +57,7 @@
 
         </div>
     </div>
+
 @endsection
 
 @section('scripts')

@@ -100,8 +100,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'dob' => [
+            'before' => 'The user must be at least 13 years old.',
         ],
     ],
 
@@ -117,7 +117,8 @@ return [
     */
 
     'attributes' => [
-        'role_id' => 'role'
+        'role_id' => 'role',
+        'dob' => 'date of birth'
     ],
 
 ];

@@ -15,10 +15,10 @@ class AccountController extends Controller
 {
     public function __construct()
     {
-        //Authenticate
+        // Authenticate
         $this->middleware('auth')->only('show');
 
-        //Authorize
+        // Authorize
         $this->authorizeResource(User::class);
     }
 
@@ -61,9 +61,9 @@ class AccountController extends Controller
         $user->assignRole($request->role_id);
 
         // Create profile
-        $user->createProfile($user, $request->role_id, $request->all());
+        $user->createProfile($request->role_id, $request->all());
 
-        return back()
+        return redirect()->route('profiles.edit', $user)
             ->with('flash', 'A new account has been created.');
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Classroom;
 use App\Role;
 use App\Subject;
-use App\Teacher;
+use App\User;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -47,7 +47,7 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(Teacher $teacher)
+    public function show(User $user)
     {
         //
     }
@@ -58,9 +58,13 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teacher $teacher)
+    public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        $subjects = Subject::orderBy('name', 'asc')->get();
+        $classrooms = Classroom::orderBy('label', 'asc')->get();
+
+        return view('profiles.edit', compact('user', 'roles', 'subjects', 'classrooms'));
     }
 
     /**
@@ -70,7 +74,7 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -81,7 +85,7 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Teacher $teacher)
+    public function destroy(User $user)
     {
         //
     }

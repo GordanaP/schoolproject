@@ -83,42 +83,46 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, User $user)
     {
-        // Student
-        if($user->isStudent())
-        {
-            $user->student()->update([
-                'classroom_id' => $request->classroom_id,
-                'about' => $request->about,
-            ]);
-        }
+        // Update account
+        $user->updateAccount($user, $request);
 
-        // Teacher
-        if ($user->isTeacher())
-        {
-            $user->teacher()->update([
-                'about' => $request->about,
-            ]);
+        // Subjects & classrooms
+        // if ($user->isTeacher())
+        // {
+        //     $teacher = Teacher::where('user_id', $user->id)->first() ;
+        //     $classrooms = Classroom::whereIn('id', $request->classroom_id)->get();
 
-            //Update subjects & classrooms
-            $teacher = Teacher::where('user_id', $user->id)->first() ;
-            $classrooms = Classroom::whereIn('id', $request->classroom_id)->get();
+        //     foreach ($request->classroom_id as $id)
+        //     {
+        //         $teacher->subjects()->attach($request->subject_id, [
+        //             'classroom_id' => $id,
+        //         ]);
+        //     }
+        // }
 
-            foreach ($request->classroom_id as $id)
-            {
-                $teacher->subjects()->attach($request->subject_id, [
-                    'classroom_id' => $id,
-                ]);
-            }
-        }
+        // Update role
+        $user->assignRole($request->role_id);
+
+        // Update profile
+        $user->updateProfile($user, $request);
 
         // Update image
-        if ($file = $request->file('image'))
-        {
-            $file->storeAs('profiles', filename($user->id, 'profile'));
-        }
+        // if ($file = $request->file('image'))
+        // {
+        //     $file->storeAs('profiles', filename($user->id, 'profile'));
+        // }
 
-        return redirect()->route('profiles.edit', $user)
-            ->with('flash', 'The profile has been updated.');
+        // Redirect()
+        if (\Auth::user()->isSuperAdmin())
+        {
+            return redirect()->route('profiles.edit', $user)
+                ->with('flash', 'The profile has been updated.');
+        }
+        else
+        {
+            Notify::flash('The profile has been updated.', 'success');
+            return redirect()->route('pages.settings', $user);
+        }
     }
 
 
@@ -148,7 +152,7 @@ class ProfileController extends Controller
             Storage::disk('profiles')->delete(filename($user->id, 'profile'));
         }
 
-        Notify::flash('The profile image has been deleted.', 'success');
+       Notify::flash('The profile image has been deleted.', 'success');
         return back();
     }
 
@@ -158,7 +162,7 @@ class ProfileController extends Controller
             'teachersIndex' => 'access',
             'studentsIndex' => 'access',
             'edit' => 'access',
-            'update' => 'access',
+            'update'  => 'updateAccount',
             'showFile' => 'updateAccount',
             'destroy'  => 'updateAccount',
         ];

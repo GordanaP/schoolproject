@@ -24,7 +24,7 @@
 <div class="form-group">
     <label for="first_name" class="col-md-3 control-label">First name <span class="asterisk">*</span></label>
     <div class="col-md-8">
-        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter first name" value="{{ $first_name ?? '' }}" {{-- {{ Request::is('accounts/*/edit') ? 'readonly' : '' }} --}}
+        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter first name" value="{{ $first_name ?? '' }}"
             data-parsley-required=""
             data-parsley-pattern="/^[a-zA-Z]*$/"
             data-parsley-maxlength="50"
@@ -39,7 +39,7 @@
 <div class="form-group">
     <label for="last_name" class="col-md-3 control-label">Last name <span class="asterisk">*</span></label>
     <div class="col-md-8">
-        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter last name" value="{{ $last_name ?? '' }}" {{-- {{ Request::is('accounts/*/edit') ? 'readonly' : '' }} --}}
+        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter last name" value="{{ $last_name ?? '' }}"
             data-parsley-required=""
             data-parsley-pattern="/^[a-zA-Z]*$/"
             data-parsley-maxlength="50"
@@ -50,27 +50,30 @@
     </div>
 </div>
 
+<!-- Gender -->
+<div class="form-group">
+    <label  class="col-md-3 control-label">Gender <span class="asterisk">*</span></label>
+    <div class="col-md-offset-3" style="padding-left: 15px">
+        <label class="radio-inline">
+            <input type="radio" name="gender" id="male" value="M"> Male
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="gender" id="female" value="F"> Female
+        </label>
+    </div>
+</div>
+
 <!-- Birth date -->
 <div class="form-group">
     <label for="dob" class="col-md-3 control-label">Date of birth <span class="asterisk">*</span></label>
     <div class="col-md-8">
-        <input type="text" name="dob" id="dob" class="form-control" placeholder="yyyy-mm-dd" value="{{ $dob }}" {{-- {{ Request::is('accounts/*/edit') ? 'readonly' : '' }} --}}
+        <input type="text" name="dob" id="dob" class="form-control" placeholder="yyyy-mm-dd" value="{{ $dob }}"
             data-parsley-required=""
             data-parsley-required-message="The date of birth is required."
         />
     </div>
 </div>
 
-<!-- Password -->
-{{-- @if (Request::is('accounts/*/edit'))
-    <div class="form-group">
-        <label for="password" class="col-md-3 control-label">Password <span class="asterisk">*</span></label>
-        <div class="col-md-8">
-            <input  type="text" name="password" id="password" class="form-control" placeholder="******" />
-        </div>
-    </div>
-@endif
- --}}
 <!-- Button -->
 <div class="form-group">
     <div class="col-md-6 col-md-offset-3">

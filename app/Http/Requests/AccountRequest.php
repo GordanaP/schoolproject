@@ -24,10 +24,10 @@ class AccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => 'required|exists:roles,id',
+            'role_id' => 'required|array|exists:roles,id',
             'first_name' => 'required|string|alpha',
             'last_name' => 'required|string|alpha',
-            'dob' => 'required|date|before:today',
+            'dob' => 'required|date|before:-13 years',
         ];
     }
 }

@@ -19,10 +19,13 @@ class CreateTeachersTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
+            $table->string('cwid');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('cwid');
+            $table->string('gender');
+            $table->string('parent')->nullable();
             $table->timestamp('dob');
+            $table->string('birthplace')->nullable();
             $table->text('about')->nullable();
             $table->timestamps();
         });

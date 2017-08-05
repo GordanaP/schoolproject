@@ -24,6 +24,10 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
+            'role_id' => 'required|array|exists:roles,id',
+            'first_name' => 'required|string|alpha',
+            'last_name' => 'required|string|alpha',
+            'dob' => 'required|date|before:-13 years',
             'about' => 'present|max:300',
             'image' => 'nullable|file|mimes:jpg,jpeg,png,gif',
         ];

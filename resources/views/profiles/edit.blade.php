@@ -13,7 +13,7 @@
 
     @include('errors._list')
 
-    <div class="row col-md-10 col-md-offset-1">
+    <div class="row col-md-12">
         @component('partials.admin._panel')
             @slot('heading')
                 <h2>

@@ -22,10 +22,13 @@ class CreateStudentsTable extends Migration
             $table->unsignedInteger('classroom_id')->index()->nullable();
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('set null');
 
+            $table->string('cwid');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('cwid');
+            $table->string('gender');
+            $table->string('parent')->nullable();
             $table->timestamp('dob');
+            $table->string('birthplace')->nullable();
             $table->text('about')->nullable();
             $table->timestamps();
         });

@@ -15,7 +15,7 @@ Route::as('pages.')->group(function(){
 Route::resource('accounts', 'AccountController', [
     'parameters' => ['accounts' => 'user']
 ]);
-Route::name('accounts.update.password')->patch('/accounts/{user}/password', 'AccountController@updatePassword');
+Route::name('accounts.update.password')->patch('accounts/{user}/password', 'AccountController@updatePassword');
 
 // Profile
 Route::name('profiles.teachers.index')->get('profiles/teachers', 'ProfileController@teachersIndex');
@@ -27,6 +27,7 @@ Route::resource('profiles', 'ProfileController', [
 ]);
 Route::name('profiles.show.file')->get('profiles/avatar/{user}', 'ProfileController@showFile');
 
-
-Route::resource('teachers', 'TeacherController');
-Route::resource('students', 'StudentController');
+// Teacher
+Route::resource('teachers', 'TeacherController', [
+    'parameters' => ['teachers' => 'user']
+]);

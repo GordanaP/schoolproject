@@ -7,8 +7,8 @@
 @endsection
 
 @section('content')
-    @component('partials.admin._breadcrumb')
-    @endcomponent
+
+    @component('partials.admin._breadcrumb') @endcomponent
 
     @component('partials.admin._panel')
         @slot('heading')
@@ -22,10 +22,12 @@
             </h2>
         @endslot
 
+        <!-- Student table -->
         @slot('body')
             @include('profiles.partials._tableStudents')
         @endslot
     @endcomponent
+
 @endsection
 
 @section('scripts')
@@ -34,7 +36,7 @@
     <script>
 
         // Initialize DataTable
-        $('#tableStudents').DataTable();
+        $('.admin__table').DataTable();
 
     </script>
 @endsection

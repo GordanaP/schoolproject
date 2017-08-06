@@ -33,3 +33,6 @@ Route::resource('avatars', 'AvatarController', [
     'only' => ['show', 'destroy']
 ]);
 Route::name('avatars.store')->post('avatars/{user}', 'AvatarController@store');
+
+// Role
+Route::resource('roles', 'RoleController');

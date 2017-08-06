@@ -1,14 +1,24 @@
 @if (count($students))
 
-@component('partials.admin._table')
+    @component('partials.admin._table')
 
-    @slot('rows')
-        @foreach ($students as $student)
-            @include('profiles.partials._rowStudent')
-        @endforeach
-    @endslot
+        @slot('th')
+            <th class="text-center" width="100px">
+                <i class="fa fa-cog"></i>
+            </th>
+            <th class="text-uppercase">Name</th>
+            <th class="text-uppercase">Cwid</th>
+            <th class="text-uppercase">Date of birth</th>
+            <th class="text-uppercase">Group</th>
+        @endslot
 
-@endcomponent
+        @slot('rows')
+            @foreach ($students as $student)
+                @include('profiles.partials._rowStudent')
+            @endforeach
+        @endslot
+
+    @endcomponent
 
 @else
     There are no students at present.

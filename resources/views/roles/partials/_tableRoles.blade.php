@@ -1,4 +1,4 @@
-@if (count($teachers))
+@if (count($roles))
 
     @component('partials.admin._table')
 
@@ -7,19 +7,16 @@
                 <i class="fa fa-cog"></i>
             </th>
             <th class="text-uppercase">Name</th>
-            <th class="text-uppercase">Cwid</th>
-            <th class="text-uppercase">Date of birth</th>
-            <th class="text-uppercase">Group</th>
         @endslot
 
         @slot('rows')
-            @foreach ($teachers as $teacher)
-                @include('profiles.partials._rowTeacher')
+            @foreach ($roles as $role)
+                @include('roles.partials._rowRole')
             @endforeach
         @endslot
 
     @endcomponent
 
 @else
-    There are no teachers at present.
+    There are no roles at present.
 @endif

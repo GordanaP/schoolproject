@@ -28,8 +28,18 @@
         </div>
     </div>
 
-
-    <li><a href="#">Another nav item</a></li>
-    <li><a href="#">More navigation</a></li>
-
+    <!-- Roles -->
+    <li>
+        <a data-toggle="collapse" href="#roles" aria-expanded="false" aria-controls="roles">
+            <i class="fa fa-briefcase" aria-hidden="true"></i> Roles
+        </a>
+    </li>
+    <div class="collapse" id="roles">
+        <div class="well">
+            <a href="{{ route('roles.index') }}">All roles</a>
+        </div>
+        <div class="well">
+            <a href="{{ route('roles.create') }}">New role</a>
+        </div>
+    </div>
 </ul>

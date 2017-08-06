@@ -48,9 +48,9 @@ return [
             'root' => storage_path('app'),
         ],
 
-        'profiles' => [
+        'avatars' => [
             'driver' => 'local',
-            'root' => storage_path('app/profiles'),
+            'root' => storage_path('app/avatars'),
         ],
 
         'public' => [

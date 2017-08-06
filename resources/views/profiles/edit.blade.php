@@ -17,15 +17,14 @@
 
     <div class="row col-md-12">
         @component('partials.admin._panel')
+
+            <!-- Title -->
             @slot('heading')
                 <h2>
-                    <i class="fa fa-pencil-square-o"></i>
-
-                    {{-- {{ $user->isStudent() ? $user->student->full_name : $user->teacher->full_name }} --}}
-                    Edit profile
-                    <a href="{{ route('profiles.students.index') }}" class="btn btn-default btn-sm pull-right text-uppercase">
+                    <i class="fa fa-pencil-square-o"></i> Edit profile
+                    <a href="{{ $user->isStudent() ? route('profiles.students.index') : route('profiles.teachers.index')}}" class="btn btn-default btn-sm pull-right text-uppercase">
                        <i class="fa fa-bars" aria-hidden="true"></i>
-                       All {{ $user->isStudent() ? 'students' : 'tecahers' }}
+                       All {{ $user->isStudent() ? 'students' : 'teachers' }}
                     </a>
                 </h2>
             @endslot

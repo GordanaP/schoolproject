@@ -178,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
+        App\Providers\UtilityServiceProvider::class,
 
     ],
 
@@ -228,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Notify' => Codecourse\Notify\Facades\Notify::class,
+        'Gender' => App\Services\Utilities\Gender::class,
     ],
 
 ];

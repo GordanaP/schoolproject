@@ -65,9 +65,17 @@ body { font-family: 'Roboto Slab', serif;}
 }
 
 .admin__panel .panel-body .btn-block { margin-top: 1px; }
+.admin__panel .col-md-9 { padding-left: 35px; }
 .admin__panel .thumbnail { border-radius: 50%; }
 
 .parsley-errors-list.filled {
     color: red !important;
     font-size: 12px;
 }
+
+ul#parsley-id-multiple-role_id li.parsley-required,
+ul#parsley-id-multiple-gender li.parsley-required {margin-left: 8px;}
+
+
+form#updateProfile div.parsley-error {margin-bottom: 0 !important;}
+form#updateProfile li.parsley-required {margin-bottom: 20px !important; margin-left: 0;}

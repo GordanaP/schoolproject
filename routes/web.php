@@ -13,7 +13,8 @@ Route::as('pages.')->group(function(){
 
 // Account
 Route::resource('accounts', 'AccountController', [
-    'parameters' => ['accounts' => 'user']
+    'parameters' => ['accounts' => 'user'],
+    'only' => ['create', 'store', 'destroy'],
 ]);
 Route::name('accounts.update.password')->patch('accounts/{user}/password', 'AccountController@updatePassword');
 
@@ -21,9 +22,10 @@ Route::name('accounts.update.password')->patch('accounts/{user}/password', 'Acco
 Route::name('profiles.teachers.index')->get('profiles/teachers', 'ProfileController@teachersIndex');
 Route::name('profiles.students.index')->get('profiles/students', 'ProfileController@studentsIndex');
 Route::resource('profiles', 'ProfileController', [
-    'except' => ['create','store', 'destroy'],
+    'only' => ['show', 'edit','update'],
     'parameters' => ['profiles' => 'user'],
 ]);
+Route::name('profiles.update.profile')->patch('profiles/{user}/profile', 'ProfileController@updateProfile');
 
 // Avatar
 Route::resource('avatars', 'AvatarController', [

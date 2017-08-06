@@ -14,7 +14,7 @@
             </li>
         @else
             <li>
-                @if (! Request::is('profiles/*'))
+                @if (! Request::is('profiles/*') && ! Request::is('accounts/*'))
                     <a href="{{ route(Request::segment(1).'.index') }}" >
                         {{ ucfirst(Request::segment(1)) }}
                     </a>

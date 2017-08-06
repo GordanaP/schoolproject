@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Services\Utilities\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
@@ -25,11 +26,15 @@ class ProfileRequest extends FormRequest
     {
         return [
             'role_id' => 'required|array|exists:roles,id',
-            'first_name' => 'required|string|alpha',
-            'last_name' => 'required|string|alpha',
+            'first_name' => 'required|string|alpha|max:50',
+            'last_name' => 'required|string|alpha|max:50',
+            'gender' => 'required|string|in:'.implode(',', array_keys(Gender::all())),
             'dob' => 'required|date|before:-13 years',
-            'about' => 'present|max:300',
-            'image' => 'nullable|file|mimes:jpg,jpeg,png,gif',
+            'birthplace' => 'nullable|string|regex:/^[a-zA-Z- ]*$/|max:100',
+            'parent' => 'nullable|string|alpha|max:50',
+            'about' => 'nullable|max:300',
+            'classroom_id' => 'nullable|exists:classrooms,id',
+            'subject_id' => 'nullable|exists:subjects,id',
         ];
     }
 }

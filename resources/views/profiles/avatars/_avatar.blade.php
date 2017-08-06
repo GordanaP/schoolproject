@@ -1,7 +1,7 @@
-@if (Storage::disk('profiles')->has(filename($user->id, 'profile')))
+@if (Storage::disk('avatars')->has(filename($user->id, 'profile')))
 
     <div class="thumbnail">
-        <img src="{{ route('avatars.show', $user->name) }}" alt="{{ $user->isTeacher() ? $user->teacher->full_name : $user->student->full_name }}" class="img-circle image" />
+        <img src="{{ route('avatars.show', $user->name) }}" alt="" class="img-circle image" />
     </div>
 
     <div class="text-center">
@@ -18,9 +18,11 @@
         @endif
     </div>
 
-    <div class="text-center">
-        @include('profiles.avatars._formStore')
-    </div>
+    @can('access', $user)
+        <div class="text-center">
+            @include('profiles.avatars._formStore')
+        </div>
+    @endcan
 
 @endif
 

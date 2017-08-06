@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AvatarRequest;
 use App\User;
 use Auth;
-use Illuminate\Http\Request;
+use Codecourse\Notify\Facades\Notify;
 use Storage;
 
 class AvatarController extends Controller
@@ -24,21 +25,21 @@ class AvatarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, User $user)
+    public function store(AvatarRequest $request, User $user)
     {
         if ($file = $request->file('image'))
         {
-            $file->storeAs('profiles', filename($user->id, 'profile'));
+            $file->storeAs('avatars', filename($user->id, 'profile'));
         }
 
         if (Auth::user()->isSuperAdmin())
         {
             return back()
-                ->with('flash', 'The profile image has been uploaded.');
+                ->with('flash', 'The avatar has been uploaded.');
         }
         else
         {
-            Notify::flash('The profile image has been uploaded.', 'success');
+            Notify::flash('The avatar has been uploaded.', 'success');
             return back();
         }
     }
@@ -51,7 +52,7 @@ class AvatarController extends Controller
      */
     public function show(User $user)
     {
-        $file = Storage::disk('profiles')->get(filename($user->id, 'profile'));
+        $file = Storage::disk('avatars')->get(filename($user->id, 'profile'));
 
         return $file;
     }
@@ -64,19 +65,19 @@ class AvatarController extends Controller
      */
     public function destroy(User $user)
     {
-        if (Storage::disk('profiles')->has(filename($user->id, 'profile')))
+        if (Storage::disk('avatars')->has(filename($user->id, 'profile')))
         {
-            Storage::disk('profiles')->delete(filename($user->id, 'profile'));
+            Storage::disk('avatars')->delete(filename($user->id, 'profile'));
         }
 
         if (Auth::user()->isSuperAdmin())
         {
             return back()
-                ->with('flash', 'The profile image has been deleted.');
+                ->with('flash', 'The avatar has been deleted.');
         }
         else
         {
-            Notify::flash('The profile image has been deleted.', 'success');
+            Notify::flash('The avatar has been deleted.', 'success');
             return back();
         }
     }
@@ -84,7 +85,7 @@ class AvatarController extends Controller
     protected function resourceAbilityMap()
     {
          return [
-            'store' => 'updateAccount',
+            'store' => 'access',
             'destroy' => 'updateAccount',
         ];
     }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Services\Utilities\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AccountRequest extends FormRequest
+class AvatarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +24,7 @@ class AccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => 'required|array|exists:roles,id',
-            'first_name' => 'required|string|alpha|max:50',
-            'last_name' => 'required|string|alpha|max:50',
-            'gender' => 'required|string|in:'.implode(',', array_keys(Gender::all())),
-            'dob' => 'required|date|before:-13 years',
+            'image' => 'nullable|file|mimes:jpg,jpeg,png,gif'
         ];
     }
 }

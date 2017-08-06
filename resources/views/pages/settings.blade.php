@@ -65,12 +65,12 @@
 
                             <!-- Image -->
                             <div class="col-md-3 well__profile-thumbnail">
-                                @include('profiles.partials._image')
+                                @include('profiles.avatars._avatar')
                             </div>
 
                             <!-- Update profile -->
                             <div class="col-md-9 well__profile-form">
-                                @include('profiles.partials._formUpdate')
+                                @include('profiles.partials._formUpdateProfile')
                             </div>
 
                         </div>

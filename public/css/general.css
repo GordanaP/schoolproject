@@ -29,8 +29,5 @@ div.alert.alert-danger { background: #fcf8e3; border-color: #faebcc; color: #8a6
 .asterisk { color:red; }
 p.required__fields { font-size: 13px; font-family: 'Gabriela', serif; margin-bottom: 30px; }
 
-ul#parsley-id-multiple-role_id li.parsley-required {margin-left: 8px;}
-
-
 p.admin__checkbox input{margin-right: 5px;}
 p.admin__checkbox span.name{margin-right: 20px;}

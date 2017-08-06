@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classroom;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\UserProfileRequest;
 use App\Role;
 use App\Student;
 use App\Subject;
@@ -111,6 +112,25 @@ class ProfileController extends Controller
             ->with('flash', 'The profile has been updated.');
     }
 
+
+    public function updateProfile(UserProfileRequest $request, User $user)
+    {
+        // Update avatar
+        if ($file = $request->file('image'))
+        {
+            $file->storeAs('avatars', filename($user->id, 'profile'));
+        }
+
+        // Update account
+        $user->student()->update([
+            'about' => $request->about
+        ]);
+
+        // Redirect
+        Notify::flash('The profile has been updated.', 'success');
+        return back();
+    }
+
     protected function resourceAbilityMap()
     {
          return [
@@ -118,6 +138,7 @@ class ProfileController extends Controller
             'studentsIndex' => 'access',
             'edit' => 'access',
             'update'  => 'access',
+            'updateProfile'  => 'updateAccount',
         ];
     }
 }

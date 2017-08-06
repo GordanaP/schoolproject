@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <!-- Breadcrumb -->
     @component('partials.admin._breadcrumb') @endcomponent
 
@@ -16,16 +17,12 @@
     <div class="row">
         <div class=" col-md-8 col-md-offset-2">
 
-            <!-- ADMIN PANEL -->
             @component('partials.admin._panel')
 
-                <!-- Heading -->
+                <!-- Title -->
                 @slot('heading')
                     <h2>
                         <i class="fa fa-pencil"></i> New account
-                        <a href="{{ route('accounts.index') }}" class="btn btn-default btn-sm pull-right text-uppercase">
-                            <i class="fa fa-list"></i>  All Accounts
-                        </a>
                     </h2>
                 @endslot
 
@@ -33,26 +30,14 @@
                 @slot('body')
                     <p class="required__fields"> Fields marked with * are required. </p>
 
-                    <form action="{{ route('accounts.store') }}" method="POST" class="form-horizontal"
-                        data-parsley-validate=""
-                        data-parsley-trigger="keyup"
-                        data-parsley-validation-threshold="1"
-                    >
-                        {{ csrf_field() }}
-
-                        @include('accounts.partials._formCreate', [
-                            'first_name' => old('first_name'),
-                            'last_name' => old('last_name'),
-                            'dob' => old('dob'),
-                            'ids' => old('role_id'),
-                            'button' => 'Create account',
-                        ])
-                    </form>
+                    @include('accounts.partials._formCreate')
                 @endslot
+
             @endcomponent
 
         </div>
     </div>
+
 @endsection
 
 @section('scripts')

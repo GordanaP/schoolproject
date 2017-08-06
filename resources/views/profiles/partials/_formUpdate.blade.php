@@ -1,4 +1,4 @@
-<form action="{{ route('profiles.update', $user) }}" method="POST" enctype="multipart/form-data"
+<form action="{{ route('profiles.update', $user) }}" method="POST"
     data-parsley-validate=""
     data-parsley-trigger="keyup"
     data-parsley-validation-threshold="1"
@@ -152,12 +152,6 @@
             </select>
         </div>
     @endif
-
-    <!-- Image -->
-    {{-- <div class="form-group">
-        <label>Upload Image</label>
-        <input type="file" name="image" id="image">
-    </div> --}}
 
     <!-- About -->
     <div class="form-group">

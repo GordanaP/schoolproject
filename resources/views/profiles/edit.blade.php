@@ -8,18 +8,24 @@
 @endsection
 
 @section('content')
-    @component('partials.admin._breadcrumb')
-    @endcomponent
 
+    <!-- Breadcrumb -->
+    @component('partials.admin._breadcrumb') @endcomponent
+
+    <!-- Errors -->
     @include('errors._list')
 
     <div class="row col-md-12">
         @component('partials.admin._panel')
             @slot('heading')
                 <h2>
-                    <i class="fa fa-pencil-square-o"></i> Edit profile
-                    <a href="{{ route('accounts.edit', $user) }}" class="btn btn-default btn-sm pull-right text-uppercase">
-                       <i class="icon_key"></i> View account
+                    <i class="fa fa-pencil-square-o"></i>
+
+                    {{-- {{ $user->isStudent() ? $user->student->full_name : $user->teacher->full_name }} --}}
+                    Edit profile
+                    <a href="{{ route('profiles.students.index') }}" class="btn btn-default btn-sm pull-right text-uppercase">
+                       <i class="fa fa-bars" aria-hidden="true"></i>
+                       All {{ $user->isStudent() ? 'students' : 'tecahers' }}
                     </a>
                 </h2>
             @endslot
@@ -27,15 +33,17 @@
             @slot('body')
                 <p class="required__fields"> Fields marked with * are required. </p>
                 <div class="row">
-                    <!-- Image -->
+
+                    <!-- Avatar -->
                     <div class="col-md-3">
-                        @include('profiles.partials._image')
+                        @include('profiles.avatars._avatar')
                     </div>
 
                     <!-- Update profile -->
                     <div class="col-md-9">
                         @include('profiles.partials._formUpdate')
                     </div>
+
                 </div>
             @endslot
         @endcomponent
@@ -53,6 +61,12 @@
 
         $("#classroom").select2({
             placeholder: 'Select classrooms'
+        });
+
+        $("#image").hide();
+        $('#uploadFile').one('click', function(e){
+            e.preventDefault();
+            $("#image").show();
         });
     </script>
 @endsection

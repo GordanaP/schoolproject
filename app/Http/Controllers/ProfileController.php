@@ -106,54 +106,9 @@ class ProfileController extends Controller
         // Update profile
         $user->updateProfile($user, $request);
 
-        // Update image
-        // if ($file = $request->file('image'))
-        // {
-        //     $file->storeAs('profiles', filename($user->id, 'profile'));
-        // }
-
         // Redirect()
-        if (\Auth::user()->isSuperAdmin())
-        {
-            return redirect()->route('profiles.edit', $user)
-                ->with('flash', 'The profile has been updated.');
-        }
-        else
-        {
-            Notify::flash('The profile has been updated.', 'success');
-            return redirect()->route('pages.settings', $user);
-        }
-    }
-
-
-    /**
-     * Display the image of the specified resource.
-     *
-     * @param  \App\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function showFile(User $user)
-    {
-        $file = Storage::disk('profiles')->get(filename($user->id, 'profile'));
-
-        return $file;
-    }
-
-    /**
-     * Remove the image of the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        if (Storage::disk('profiles')->has(filename($user->id, 'profile')))
-        {
-            Storage::disk('profiles')->delete(filename($user->id, 'profile'));
-        }
-
-       Notify::flash('The profile image has been deleted.', 'success');
-        return back();
+        return redirect()->route('profiles.edit', $user)
+            ->with('flash', 'The profile has been updated.');
     }
 
     protected function resourceAbilityMap()
@@ -162,9 +117,7 @@ class ProfileController extends Controller
             'teachersIndex' => 'access',
             'studentsIndex' => 'access',
             'edit' => 'access',
-            'update'  => 'updateAccount',
-            'showFile' => 'updateAccount',
-            'destroy'  => 'updateAccount',
+            'update'  => 'access',
         ];
     }
 }

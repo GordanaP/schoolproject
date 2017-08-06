@@ -21,13 +21,13 @@ Route::name('accounts.update.password')->patch('accounts/{user}/password', 'Acco
 Route::name('profiles.teachers.index')->get('profiles/teachers', 'ProfileController@teachersIndex');
 Route::name('profiles.students.index')->get('profiles/students', 'ProfileController@studentsIndex');
 Route::resource('profiles', 'ProfileController', [
-    'except' => ['create','store'],
+    'except' => ['create','store', 'destroy'],
     'parameters' => ['profiles' => 'user'],
-    'names' => ['destroy' => 'profiles.destroy.file'],
 ]);
-Route::name('profiles.show.file')->get('profiles/avatar/{user}', 'ProfileController@showFile');
 
-// Teacher
-Route::resource('teachers', 'TeacherController', [
-    'parameters' => ['teachers' => 'user']
+// Avatar
+Route::resource('avatars', 'AvatarController', [
+    'parameters' => ['avatars' => 'user'],
+    'only' => ['show', 'destroy']
 ]);
+Route::name('avatars.store')->post('avatars/{user}', 'AvatarController@store');

@@ -29,8 +29,4 @@ class Role extends Model
         return ucfirst($this->name);
     }
 
-    public function getNameAttribute($value)
-    {
-        return ucfirst($value);
-    }
 }

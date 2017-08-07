@@ -10,12 +10,12 @@ class AccountPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the authenticated user can access the user account.
+     * Determine whether the authenticated user can access the account user.
      *
-     * @param  \App\User  $account
+     * @param  \App\User  $user
      * @return mixed
      */
-    public function access(User $account)
+    public function access(User $user)
     {
         //
     }

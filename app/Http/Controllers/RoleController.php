@@ -7,6 +7,12 @@ use App\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        // Authorize
+        $this->authorizeResource(Role::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -52,6 +58,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+
         return view('roles.edit', compact('role'));
     }
 
@@ -82,5 +89,17 @@ class RoleController extends Controller
 
         return back()
             ->with('flash', 'The role has been deleted.');
+    }
+
+    protected function resourceAbilityMap()
+    {
+         return [
+            'index' => 'access',
+            'create' => 'access',
+            'store' => 'access',
+            'edit' => 'access',
+            'update' => 'access',
+            'destroy' => 'access',
+        ];
     }
 }

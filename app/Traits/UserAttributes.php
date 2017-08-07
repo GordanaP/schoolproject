@@ -51,4 +51,21 @@ trait UserAttributes
             return ucfirst($this->teacher->parent);
         }
     }
+
+    public function getFullNameAttribute()
+    {
+        if ($this->isStudent())
+        {
+            return ucfirst($this->student->first_name) . ' ' .ucfirst($this->student->last_name);
+        }
+        elseif ( $this->isTeacher())
+        {
+            return ucfirst($this->teacher->first_name) . ' ' .ucfirst($this->teacher->last_name);
+        }
+        else
+        {
+            return $this->name;
+        }
+    }
+
 }

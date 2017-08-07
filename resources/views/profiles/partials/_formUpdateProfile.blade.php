@@ -19,7 +19,7 @@
         <textarea name="about" id="about" rows="5" placeholder="Introduce yourself to the Laaracschool community in less than 300 characters" class="form-control"
             data-parsley-maxlength="300"
             data-parsley-maxlength-message="The about me field must be less than 300 characters long."
-        >{{ $user->isTeacher() ? $user->load('teacher')->teacher->about : $user->load('student')->student->about  }}</textarea>
+        >{{-- {{ $user->isTeacher() ? $user->load('teacher')->teacher->about : $user->load('student')->student->about  }} --}}</textarea>
 
         <!-- Button -->
         <button class="btn btn-success btn-block text-uppercase ls">

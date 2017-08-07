@@ -35,4 +35,6 @@ Route::resource('avatars', 'AvatarController', [
 Route::name('avatars.store')->post('avatars/{user}', 'AvatarController@store');
 
 // Role
-Route::resource('roles', 'RoleController');
+Route::resource('roles', 'RoleController', [
+    'except' => 'show'
+]);

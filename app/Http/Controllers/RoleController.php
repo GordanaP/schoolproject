@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use App\Role;
-use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -26,7 +26,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
@@ -35,21 +35,14 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        Role::create($request->all());
+
+        return back()
+            ->with('flash', 'A new role has been created.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -59,7 +52,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view('roles.edit', compact('role'));
     }
 
     /**
@@ -69,9 +62,12 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        $role->update($request->all());
+
+        return redirect()->route('roles.edit', compact('role'))
+            ->with('flash', 'The role has been updated.');
     }
 
     /**
@@ -82,6 +78,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return back()
+            ->with('flash', 'The role has been deleted.');
     }
 }

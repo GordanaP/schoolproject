@@ -41,5 +41,46 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
+    <script src="{{ asset('vendor/parsley/laravel-parsley.min.js') }}"></script>
+
+    <script>
+        // set parsley data format
+        $('form').parsley({
+          dateFormats: ['YYYY-MM-DD']
+        });
+
+        $('input[type="checkbox"]').on('click', function(){
+
+            if($('#role_1').is(":checked")){
+                $("#role_2").attr('disabled', true);
+            }
+            else{
+                $("#role_2").removeAttr('disabled');
+            }
+
+            if($('#role_2').is(":checked")){
+                $("#role_1").attr('disabled', true);
+            }
+            else{
+                $("#role_1").removeAttr('disabled');
+            }
+
+            if($('#role_3').is(":checked")){
+                $("#role_4").attr('disabled', true);
+            }
+            else{
+                $("#role_4").removeAttr('disabled');
+            }
+
+            if($('#role_4').is(":checked")){
+                $("#role_3").attr('disabled', true);
+            }
+            else{
+                $("#role_3").removeAttr('disabled');
+            }
+        })
+
+    </script>
 @endsection

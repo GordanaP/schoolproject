@@ -26,8 +26,8 @@ class AccountRequest extends FormRequest
     {
         return [
             'role_id' => 'required|array|exists:roles,id',
-            'first_name' => 'required|string|alpha|max:50',
-            'last_name' => 'required|string|alpha|max:50',
+            'first_name' => 'required|string|alpha_spaces|max:50',
+            'last_name' => 'required|string|alpha_spaces|max:50',
             'gender' => 'required|string|in:'.implode(',', array_keys(Gender::all())),
             'dob' => 'required|date|before:-13 years',
         ];

@@ -50,5 +50,4 @@ trait UserRoles
 
         $this->hasRole($roles) ? $this->roles()->sync($role) : $this->roles()->attach($role);
     }
-
 }

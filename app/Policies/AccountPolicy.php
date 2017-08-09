@@ -15,7 +15,7 @@ class AccountPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function access(User $user)
+    public function access(User $account)
     {
         //
     }
@@ -27,9 +27,8 @@ class AccountPolicy
      * @param  \App\User  $user [authenticated user]
      * @return mixed
      */
-    public function updateAccount(User $account, User $user)
+    public function updateAccount(User $auth, User $account)
     {
-        return $user->me($account);
+        return $auth->me($account);
     }
-
 }

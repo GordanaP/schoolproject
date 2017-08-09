@@ -26,7 +26,7 @@ class AccountController extends Controller
     {
         $roles = Role::all();
 
-        return view('accounts.create', compact('roles'));
+        return view('accounts.create', compact('roles', 'age'));
     }
 
     /**

@@ -87,6 +87,8 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
+    "alpha_spaces"         => 'The :attribute may only contain letters and spaces.',
+    "exclude_one"         => 'The :attribute may be either student or teacher and either admin or superadmin.',
 
     /*
     |--------------------------------------------------------------------------

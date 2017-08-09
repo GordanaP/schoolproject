@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 function fullname($f_name, $l_name)
 {
     return ucfirst($f_name) . ' ' . ucfirst($l_name);
@@ -63,4 +65,9 @@ function checked($checked, $current)
 function filename($id, $name)
 {
     return $id.'-'.$name.'.jpg';
+}
+
+function minAge($age)
+{
+    return Carbon::today()->subYears($age)->format('Y-m-d');
 }

@@ -179,7 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         App\Providers\UtilityServiceProvider::class,
-
+        App\Providers\ValidatorServiceProvider::class,
     ],
 
     /*

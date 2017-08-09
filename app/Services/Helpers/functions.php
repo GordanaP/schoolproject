@@ -2,9 +2,15 @@
 
 use Carbon\Carbon;
 
-function fullname($f_name, $l_name)
+function getFirst($name)
 {
-    return ucfirst($f_name) . ' ' . ucfirst($l_name);
+    $names = explode(' ', $name);
+
+    count($names) > 1
+        ? list($first_name, $last_name) = $names
+        : $first_name = $name;
+
+    return $first_name;
 }
 
 function username($f_name, $l_name)
@@ -18,7 +24,7 @@ function username($f_name, $l_name)
 
 function email($f_name, $l_name)
 {
-    return strtolower($f_name) .'.'. strtolower($l_name);
+    return strtolower(getFirst($f_name)) .'.'. strtolower(getFirst($l_name));
 }
 
 function password($f_name, $l_name, $dob)
@@ -47,9 +53,14 @@ function password($f_name, $l_name, $dob)
     return $f_name_init . $l_name_init . $year . $month . $day;
 }
 
-function slug($f_name, $l_name)
+function slug_name($f_name, $l_name)
 {
-    return str_slug($f_name . '-' . $l_name);
+    return str_slug(getFirst($f_name) . '-' . getFirst($l_name));
+}
+
+function minAge($age)
+{
+    return Carbon::today()->subYears($age)->format('Y-m-d');
 }
 
 function selected($selected, $current)
@@ -67,7 +78,7 @@ function filename($id, $name)
     return $id.'-'.$name.'.jpg';
 }
 
-function minAge($age)
+function fullname($f_name, $l_name)
 {
-    return Carbon::today()->subYears($age)->format('Y-m-d');
+    return ucfirst($f_name) . ' ' . ucfirst($l_name);
 }

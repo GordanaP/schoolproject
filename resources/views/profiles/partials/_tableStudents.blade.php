@@ -13,7 +13,7 @@
         @endslot
 
         @slot('rows')
-            @foreach ($students as $student)
+            @foreach ($students as $value => $student)
                 @include('profiles.partials._rowStudent')
             @endforeach
         @endslot

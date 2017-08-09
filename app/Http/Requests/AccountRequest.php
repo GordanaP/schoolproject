@@ -25,7 +25,7 @@ class AccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => 'required|array|exists:roles,id',
+            'role_id' => 'required|array|exclude_one|exclude_two|exists:roles,id',
             'first_name' => 'required|string|alpha_spaces|max:50',
             'last_name' => 'required|string|alpha_spaces|max:50',
             'gender' => 'required|string|in:'.implode(',', array_keys(Gender::all())),

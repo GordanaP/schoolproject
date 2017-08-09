@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Role;
 use Illuminate\Support\ServiceProvider;
 use Validator;
 
@@ -21,7 +22,16 @@ class ValidatorServiceProvider extends ServiceProvider
 
         Validator::extend('exclude_one', function($attribute, $value)
         {
+            $array = [1, 2];
 
+            return array_intersect($array, $value) != $array;
+        });
+
+        Validator::extend('exclude_two', function($attribute, $value)
+        {
+            $array = [3, 4];
+
+            return array_intersect($array, $value) != $array;
         });
     }
 

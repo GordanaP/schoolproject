@@ -88,7 +88,7 @@ trait UserAccount
     {
         $user->username = username($fields['first_name'], $fields['last_name']);
         $user->password = bcrypt(password($fields['first_name'], $fields['last_name'], $fields['dob']));
-        $user->name = slug($fields['first_name'], $fields['last_name']);
+        $user->name = slug_name($fields['first_name'], $fields['last_name']);
 
         $count = static::whereRaw("name REGEXP '^{$user->name}(-[0-9]*)?$'")->count();
 

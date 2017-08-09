@@ -88,7 +88,8 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     "alpha_spaces"         => 'The :attribute may only contain letters and spaces.',
-    "exclude_one"         => 'The :attribute may be either student or teacher and either admin or superadmin.',
+    "exclude_one"         => 'The :attribute may be either student or teacher.',
+    "exclude_two"         => 'The :attribute may be either admin or superadmin.',
 
     /*
     |--------------------------------------------------------------------------

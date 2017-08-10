@@ -20,6 +20,16 @@ class ValidatorServiceProvider extends ServiceProvider
             return preg_match('/^[a-zA-Z ]+$/', $value);
         });
 
+        Validator::extend('alpha_num_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[a-zA-Z1-9 ]+$/', $value);
+        });
+
+        Validator::extend('alpha_dash_spaces', function($attribute, $value)
+        {
+            return preg_match('/^[a-zA-Z1-9-_ ]+$/', $value);
+        });
+
         Validator::extend('exclude_one', function($attribute, $value)
         {
             $array = [1, 2];

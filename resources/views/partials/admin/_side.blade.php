@@ -61,7 +61,7 @@
     <!-- Classrooms -->
     <li>
         <a data-toggle="collapse" href="#subjects" aria-expanded="false" aria-controls="subjects">
-            <i class="icon_pushpin_alt" aria-hidden="true"></i> subjects
+            <i class="icon_pushpin" aria-hidden="true"></i> Subjects
         </a>
     </li>
     <div class="collapse" id="subjects">

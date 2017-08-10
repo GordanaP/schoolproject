@@ -43,3 +43,7 @@ Route::resource('roles', 'RoleController', [
 Route::resource('classrooms', 'ClassroomController', [
     'except' => ['show']
 ]);
+
+Route::resource('subjects', 'Subjectcontroller', [
+    'except' => ['show']
+]);

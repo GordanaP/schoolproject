@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubjectRequest;
 use App\Subject;
-use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
@@ -14,7 +14,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = Subject::orderBy('name', 'asc')->get();
+
+        return view('subjects.index', compact('subjects'));
     }
 
     /**
@@ -24,7 +26,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('subjects.create');
     }
 
     /**
@@ -33,21 +35,14 @@ class SubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubjectRequest $request)
     {
-        //
+        Subject::create($request->all());
+
+        return back()
+            ->with('flash', 'A new subject has been created.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subject $subject)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -57,7 +52,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
+        return view('subjects.edit', compact('subject'));
     }
 
     /**
@@ -67,9 +62,12 @@ class SubjectController extends Controller
      * @param  \App\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subject $subject)
+    public function update(SubjectRequest $request, Subject $subject)
     {
-        //
+        $subject->update($request->all());
+
+        return back()
+            ->with('flash', 'The subject has been updated.');
     }
 
     /**
@@ -80,6 +78,9 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject->delete();
+
+        return back()
+            ->with('flash', 'The subject has been deleted.');
     }
 }

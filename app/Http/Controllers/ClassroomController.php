@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Classroom;
+use App\Http\Requests\ClassroomRequest;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
 {
+    public function __construct()
+    {
+        // Authorize
+        $this->authorizeResource(Classroom::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,9 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        //
+        $classrooms = Classroom::orderBy('label', 'asc')->get();
+
+        return view('classrooms.index', compact('classrooms'));
     }
 
     /**
@@ -24,7 +33,7 @@ class ClassroomController extends Controller
      */
     public function create()
     {
-        //
+        return view('classrooms.create');
     }
 
     /**
@@ -33,21 +42,14 @@ class ClassroomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClassroomRequest $request)
     {
-        //
+        Classroom::create($request->all());
+
+        return back()
+            ->with('flash', 'A new classroom has been created.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Classroom  $classroom
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Classroom $classroom)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -57,7 +59,7 @@ class ClassroomController extends Controller
      */
     public function edit(Classroom $classroom)
     {
-        //
+        return view('classrooms.edit', compact('classroom'));
     }
 
     /**
@@ -67,9 +69,13 @@ class ClassroomController extends Controller
      * @param  \App\Classroom  $classroom
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classroom $classroom)
+    public function update(ClassroomRequest $request, Classroom $classroom)
     {
-        //
+        $classroom->update($request->all());
+
+        return redirect()->route('classrooms.edit', compact('classroom'))
+            ->with('flash', 'The classroom has been updated.');
+
     }
 
     /**
@@ -80,6 +86,22 @@ class ClassroomController extends Controller
      */
     public function destroy(Classroom $classroom)
     {
-        //
+        $classroom->delete();
+
+        return back()
+            ->with('flash', 'The classroom has been deleted.');
+
+    }
+
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'access',
+            'create' => 'access',
+            'store' => 'access',
+            'edit' => 'access',
+            'update' => 'access',
+            'destroy' => 'access',
+        ];
     }
 }

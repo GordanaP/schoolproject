@@ -38,3 +38,8 @@ Route::name('avatars.store')->post('avatars/{user}', 'AvatarController@store');
 Route::resource('roles', 'RoleController', [
     'except' => 'show'
 ]);
+
+// Classroom
+Route::resource('classrooms', 'ClassroomController', [
+    'except' => ['show']
+]);

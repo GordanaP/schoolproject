@@ -31,7 +31,7 @@
     <!-- Roles -->
     <li>
         <a data-toggle="collapse" href="#roles" aria-expanded="false" aria-controls="roles">
-            <i class="fa fa-briefcase" aria-hidden="true"></i> Roles
+            <i class="icon_briefcase" aria-hidden="true"></i> Roles
         </a>
     </li>
     <div class="collapse" id="roles">
@@ -40,6 +40,36 @@
         </div>
         <div class="well">
             <a href="{{ route('roles.create') }}">New role</a>
+        </div>
+    </div>
+
+    <!-- Classrooms -->
+    <li>
+        <a data-toggle="collapse" href="#classrooms" aria-expanded="false" aria-controls="classrooms">
+            <i class="icon_book_alt" aria-hidden="true"></i> Classrooms
+        </a>
+    </li>
+    <div class="collapse" id="classrooms">
+        <div class="well">
+            <a href="{{ route('classrooms.index') }}">All classrooms</a>
+        </div>
+        <div class="well">
+            <a href="{{ route('classrooms.create') }}">New classroom</a>
+        </div>
+    </div>
+
+    <!-- Classrooms -->
+    <li>
+        <a data-toggle="collapse" href="#subjects" aria-expanded="false" aria-controls="subjects">
+            <i class="icon_pushpin_alt" aria-hidden="true"></i> subjects
+        </a>
+    </li>
+    <div class="collapse" id="subjects">
+        <div class="well">
+            <a href="{{ route('subjects.index') }}">All subjects</a>
+        </div>
+        <div class="well">
+            <a href="{{ route('subjects.create') }}">New subject</a>
         </div>
     </div>
 </ul>

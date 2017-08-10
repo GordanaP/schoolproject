@@ -19,12 +19,6 @@ class Student extends Model
         static::observe(\App\Observers\StudentObserver::class);
     }
 
-    public function getNameAttribute()
-    {
-       return ucfirst($this->first_name);
-    }
-
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -35,5 +29,9 @@ class Student extends Model
         return $this->belongsTo(Classroom::class);
     }
 
+    public function getNameAttribute()
+    {
+       return ucfirst($this->first_name);
+    }
 
 }

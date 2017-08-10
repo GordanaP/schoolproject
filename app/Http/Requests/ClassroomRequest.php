@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class ClassroomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,17 +27,16 @@ class RoleRequest extends FormRequest
         {
             case 'POST':
                 return [
-                    'name' => 'required|string|regex:/^[a-zA-Z ]*$/|max:50|unique:roles,name',
+                    'label' => 'required|string|alpha_dash|max:10|unique:classrooms,label'
                 ];
                 break;
 
             case 'PUT':
             case 'PATCH':
                 return [
-                    'name' => 'required|string|regex:/^[a-zA-Z ]*$/|max:50|unique:roles,name,'.$this->role->id,
+                    'label' => 'required|string|alpha_dash|max:10|unique:classrooms,label,'.$this->classroom->id,
                 ];
                 break;
         }
-
     }
 }

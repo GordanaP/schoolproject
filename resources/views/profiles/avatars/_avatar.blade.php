@@ -5,7 +5,7 @@
     </div>
 
     <div class="text-center">
-        @include('profiles.avatars._formDelete')
+            @include('profiles.avatars._formDelete')
     </div>
 
 @else

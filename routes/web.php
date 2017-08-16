@@ -47,3 +47,5 @@ Route::resource('classrooms', 'ClassroomController', [
 Route::resource('subjects', 'Subjectcontroller', [
     'except' => ['show']
 ]);
+
+Route::name('accounts.reset.password')->patch('password/{user}', 'AccountController@resetPassword');

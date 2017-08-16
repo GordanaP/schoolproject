@@ -72,7 +72,20 @@ class ProfileController extends Controller
         $subjects = Subject::orderBy('name', 'asc')->get();
         $classrooms = Classroom::orderBy('label', 'asc')->get();
 
-        return view('profiles.edit', compact('user', 'roles', 'subjects', 'classrooms'));
+        if (request()->ajax())
+        {
+            if ($user->isStudent())
+            {
+                return $user->student;
+            }
+            else{
+                return $user->teacher;
+            }
+        }
+        else
+        {
+            return view('profiles.edit', compact('user', 'roles', 'subjects', 'classrooms'));
+        }
     }
 
     /**
@@ -87,19 +100,18 @@ class ProfileController extends Controller
         // Update account
         $user->updateAccount($user, $request);
 
-        // Subjects & classrooms
-        // if ($user->isTeacher())
-        // {
-        //     $teacher = Teacher::where('user_id', $user->id)->first() ;
-        //     $classrooms = Classroom::whereIn('id', $request->classroom_id)->get();
+        //Subjects & classrooms
+        if ($user->isTeacher())
+        {
+            $teacher = $user->teacher;
 
-        //     foreach ($request->classroom_id as $id)
-        //     {
-        //         $teacher->subjects()->attach($request->subject_id, [
-        //             'classroom_id' => $id,
-        //         ]);
-        //     }
-        // }
+            foreach ($request->classroom_id as $id)
+            {
+                $teacher->subjects()->attach($request->subject_id, [
+                    'classroom_id' => $id,
+                ]);
+            }
+        }
 
         // Update role
         $user->assignRole($request->role_id);

@@ -58,6 +58,12 @@ function slug_name($f_name, $l_name)
     return str_slug(getFirst($f_name) . '-' . getFirst($l_name));
 }
 
+function dob($date)
+{
+    return Carbon::parse($date)->format('Y-m-d');
+}
+
+
 function minAge($age)
 {
     return Carbon::today()->subYears($age)->format('Y-m-d');

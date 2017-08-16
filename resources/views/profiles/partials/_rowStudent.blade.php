@@ -18,16 +18,25 @@
     </td>
 
     <!-- Name -->
-    <td>{{ $student->full_name }}</td>
+    <td>
+        <a href="{{ route('profiles.show', $student->user->name) }}">
+            {{ $student->full_name }}
+        </a>
+    </td>
 
     <!-- Cwid -->
     <td>{{ $student->cwid }}</td>
 
     <!-- Date of birth -->
-    <td>{{ $student->dob->format('Y-m-d') }}</td>
+    <td>{{ dob($student->dob) }}</td>
 
     <!-- Subjects -->
     <td>
         I 2
+    </td>
+
+    <!-- Reset password -->
+    <td>
+        <a href="" id="editPassword" data-id="{{ $student->user->name }}" data-dob="{{ dob($student->dob) }}" data-toggle="modal" data-target="#passwordModal">Reset password</a>
     </td>
 </tr>

@@ -17,7 +17,6 @@
 
     <div class="row col-md-12">
         @component('partials.admin._panel')
-
             <!-- Title -->
             @slot('heading')
                 <h2>
@@ -50,10 +49,17 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
     <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
+    <script src="{{ asset('vendor/parsley/laravel-parsley.min.js') }}"></script>
 
     <script>
+
+        $('form').parsley({
+          dateFormats: ['YYYY-MM-DD']
+        });
+
         $("#subject").select2({
             placeholder: 'Select subjects'
         });
@@ -67,5 +73,22 @@
             e.preventDefault();
             $("#image").show();
         });
+
+        $('input[type="checkbox"]').on('click', function()
+        {
+            if($('#role_3').is(":checked")){
+                $("#role_4").attr('disabled', true);
+            }
+            else{
+                $("#role_4").removeAttr('disabled');
+            }
+
+            if($('#role_4').is(":checked")){
+                $("#role_3").attr('disabled', true);
+            }
+            else{
+                $("#role_3").removeAttr('disabled');
+            }
+        })
     </script>
 @endsection

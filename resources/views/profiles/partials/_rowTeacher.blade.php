@@ -20,7 +20,9 @@
 
     <!-- Name -->
     <td>
-        {{ $teacher->full_name }}
+        <a href="{{ route('profiles.show', $teacher->user->name) }}">
+            {{ $teacher->full_name }}
+        </a>
     </td>
 
     <!-- Cwid -->
@@ -36,5 +38,12 @@
     <!-- Subjects -->
     <td>
         Biology, history
+    </td>
+
+    <!-- Reset password -->
+    <td>
+        <a href="" id="editPassword" data-id="{{ $teacher->user->name }}" data-dob="{{ dob($teacher->dob) }}" data-toggle="modal" data-target="#passwordModal">
+            Reset password
+        </a>
     </td>
 </tr>

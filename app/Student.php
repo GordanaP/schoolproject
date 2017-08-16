@@ -34,4 +34,8 @@ class Student extends Model
        return ucfirst($this->first_name);
     }
 
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' .ucfirst($this->last_name);
+    }
 }

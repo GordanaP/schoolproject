@@ -61,5 +61,5 @@
         margin-bottom: 0;
     }
     .alert__flash-type{ background: #031634; padding: 19px 0px 19px 10px; }
-    .alert__flash-message{ background: #acd0d2; padding:10px}
+    .alert__flash-message{ background: #acd0d2; padding:10px; height: 56px;}
 </style>

@@ -67,7 +67,7 @@
                         data-parsley-required=""
                         data-parsley-in="M,F"
                         data-parsley-required-message="The gender is required."
-                        data-parsley-in-message="The gender should be either male or female."
+                        data-parsley-in-message="The value is invalid."
                         {{ checked($gender, old('gender')) }}
                     />
                     <span class="name">{{ $name }}</span>
@@ -83,7 +83,7 @@
             <input type="text" name="dob" id="dob" class="form-control" placeholder="yyyy-mm-dd" value="{{ old('dob') }}"
                 data-parsley-required=""
                 data-parsley-before="{{ minAge(12) }}"
-                data-parsley-date
+                data-parsley-date=""
                 data-parsley-required-message="The date of birth is required."
             />
         </div>

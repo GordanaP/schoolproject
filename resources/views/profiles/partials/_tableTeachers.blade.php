@@ -10,6 +10,9 @@
             <th class="text-uppercase">Cwid</th>
             <th class="text-uppercase">Date of birth</th>
             <th class="text-uppercase">Group</th>
+            <th>
+               <i class="icon_lock"></i>
+            </th>
         @endslot
 
         @slot('rows')

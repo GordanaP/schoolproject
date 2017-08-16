@@ -23,7 +23,13 @@
         @endslot
 
         @slot('body')
+
+            <!-- Table -->
             @include('profiles.partials._tableTeachers')
+
+            <!-- Reset password -->
+            @include('accounts.partials._modalPassword')
+
         @endslot
     @endcomponent
 
@@ -36,6 +42,8 @@
 
         // Initialize DataTable
         $('.admin__table').DataTable();
+
+        @include('accounts.partials._js')
 
     </script>
 @endsection

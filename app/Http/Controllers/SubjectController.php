@@ -7,6 +7,11 @@ use App\Subject;
 
 class SubjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Subject::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -82,5 +87,17 @@ class SubjectController extends Controller
 
         return back()
             ->with('flash', 'The subject has been deleted.');
+    }
+
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'access',
+            'create' => 'access',
+            'store' => 'access',
+            'edit' => 'access',
+            'update' => 'access',
+            'destroy' => 'access',
+        ];
     }
 }

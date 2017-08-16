@@ -7,6 +7,7 @@ use App\Http\Requests\PasswordRequest;
 use App\Role;
 use App\User;
 use Codecourse\Notify\Facades\Notify;
+use Illuminate\Http\Request;
 use Storage;
 
 class AccountController extends Controller
@@ -52,7 +53,25 @@ class AccountController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Reset password by an admin.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function resetPassword(Request $request, User $user)
+    {
+        $user->update([
+            'password' => password($request->first_name, $request->last_name, $request->dob)
+        ]);
+
+        return response([
+            'message' => 'The password has been reset',
+        ]);
+    }
+
+    /**
+     * Change password by a user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user

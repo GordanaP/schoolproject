@@ -68,4 +68,16 @@ trait UserAttributes
         }
     }
 
+    public function getBirthDateAttribute()
+    {
+        if ($this->isStudent())
+        {
+            return $this->student->dob->format('Y-m-d');
+        }
+        elseif ($this->isTeacher())
+        {
+            return $this->teacher->dob->format('Y-m-d');
+        }
+    }
+
 }

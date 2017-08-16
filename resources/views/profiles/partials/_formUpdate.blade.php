@@ -27,13 +27,13 @@
                     data-parsley-required=""
                     data-parsley-mincheck="1"
                     data-parsley-required-message="The role is required."
-
                     @if ($ids = $user->roles->pluck('id'))
                         @foreach ($ids as $role_id)
                             {{ checked($role->id, $role_id) }}
                         @endforeach
                     @endif
                 />
+
                 <span class="name" style="margin-right: 20px">{{ ucfirst($role->name) }}</span>
             @endforeach
     </div>
@@ -45,7 +45,9 @@
         @foreach (Gender::all() as $gender => $name)
             <input type="radio" name="gender" id="{{ $name }}" value="{{ $gender }}"
                 data-parsley-required=""
+                data-parsley-in="M,F"
                 data-parsley-required-message="The gender is required."
+                data-parsley-in-message="The gender value is invalid."
                 @if ($user->isStudent())
                     {{ checked($gender, $user->student->gender) }}
                 @else
@@ -80,10 +82,10 @@
                 <label for="first_name">First Name <span class="asterisk">*</span></label>
                 <input type="text" name="first_name" id="first_name" class="form-control" value="{{ $user->isTeacher() ? $user->first_name : $user->first_name }}"
                     data-parsley-required=""
-                    data-parsley-pattern="/^[a-zA-Z]*$/"
+                    data-parsley-pattern="/^[a-zA-Z ]*$/"
                     data-parsley-maxlength="50"
                     data-parsley-required-message="The first name is required."
-                    data-parsley-pattern-message="The value is invalid. Only letters are allowed."
+                    data-parsley-pattern-message="The value is invalid. Only letters and spaces are allowed."
                     data-parsley-maxlength-message="The first name must be less than 50 characters long."
                 />
             </div>
@@ -94,10 +96,10 @@
                 <label for="last_name">Last Name <span class="asterisk">*</span></label>
                 <input type="text" name="last_name" id="last_name" class="form-control" value="{{ $user->isTeacher() ? $user->last_name : $user->last_name }}"
                     data-parsley-required=""
-                    data-parsley-pattern="/^[a-zA-Z]*$/"
+                    data-parsley-pattern="/^[a-zA-Z ]*$/"
                     data-parsley-maxlength="50"
                     data-parsley-required-message="The last name is required."
-                    data-parsley-pattern-message="The value is invalid. Only letters are allowed."
+                    data-parsley-pattern-message="The value is invalid. Only letters and spaces are allowed."
                     data-parsley-maxlength-message="The last name must be less than 50 characters long."
                 />
             </div>
@@ -111,6 +113,8 @@
                 <label for="dob">Date of birth <span class="asterisk">*</span></label>
                 <input type="text" name="dob" id="dob" class="form-control" value="{{ $user->isTeacher() ? $user->teacher->dob->format('Y-m-d') : $user->student->dob->format('Y-m-d') }}"
                     data-parsley-required=""
+                    data-parsley-before="{{ minAge(12) }}"
+                    data-parsley-date
                     data-parsley-required-message="The date of birth is required."
                 />
             </div>
@@ -119,9 +123,9 @@
             <div class="form-group">
                 <label for="birthplace">Place of Birth</label>
                 <input type="text" name="birthplace" id="birthplace" class="form-control" placeholder="Enter birthplace" value="{{ $user->birthplace }}"
-                data-parsley-pattern="/^[a-zA-Z- ]*$/"
+                data-parsley-pattern="/^[a-zA-Z ]*$/"
                 data-parsley-maxlength="100"
-                data-parsley-pattern-message="The value is invalid. Only letters, dashes and spaces are allowed."
+                data-parsley-pattern-message="The value is invalid. Only letters and spaces are allowed."
                 data-parsley-maxlength-message="The birthplace must be less than 100 characters long."
                 />
             </div>
@@ -132,9 +136,9 @@
     <div class="form-group">
         <label for="parent">Parent Name</label>
         <input type="text" name="parent" id="parent" class="form-control" placeholder="Enter a parent name"  value="{{ $user->parent_name}}"
-            data-parsley-pattern="/^[a-zA-Z]*$/"
+            data-parsley-pattern="/^[a-zA-Z ]*$/"
             data-parsley-maxlength="50"
-            data-parsley-pattern-message="The value is invalid. Only letters are allowed."
+            data-parsley-pattern-message="The value is invalid. Only letters and spaces are allowed."
             data-parsley-maxlength-message="The parent name must be less than 50 characters long."
         />
     </div>
@@ -145,7 +149,11 @@
             <label for="subject">Subject</label>
             <select name="subject_id[]" id="subject" class="form-control" multiple>
                 @foreach ($subjects as $subject)
-                    <option value="{{ $subject->id }}">
+                    <option value="{{ $subject->id }}"
+                        @foreach ($user->teacher->subjects->pluck('id') as $id)
+                            {{ selected($subject->id, $id) }}
+                        @endforeach
+                    >
                         {{ $subject->name }}
                     </option>
                 @endforeach

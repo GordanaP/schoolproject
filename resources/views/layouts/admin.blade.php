@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body class="admin__body">
 
     @include('partials.admin._nav')
 

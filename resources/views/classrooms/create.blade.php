@@ -24,7 +24,7 @@
                     <h2>
                         <i class="fa fa-pencil"></i> New classroom
                         <a href="{{ route('classrooms.index') }}" class="btn btn-default btn-sm pull-right text-uppercase">
-                            <i class="fa fa-bars" aria-hidden="true"></i> All classrooms
+                            <i class="fa fa-database" aria-hidden="true"></i> All classrooms
                         </a>
                     </h2>
                 @endslot
@@ -43,7 +43,6 @@
                         @include('classrooms.partials._formCreate', [
                             'label' => old('label'),
                             'button' => 'Create classroom',
-                            'class' => 'account__button'
                         ])
 
                     </form>

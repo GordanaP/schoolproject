@@ -13,8 +13,7 @@
     @component('partials.admin._panel')
         @slot('heading')
             <h2>
-                <img src="{{ asset('images/menu-icon.svg') }}" alt="" width="3%">
-                All teachers
+                <i class="fa fa-database" aria-hidden="true"></i> All teachers
 
                 <a href="{{ route('profiles.students.index') }}" class="btn btn-default btn-sm pull-right text-uppercase">
                     <i class="fa fa-bars" aria-hidden="true"></i> All Students

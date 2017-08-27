@@ -18,9 +18,7 @@
                 <!-- Title -->
                 @slot('heading')
                     <h2>
-                        <img src="{{ asset('images/menu-icon.svg') }}" alt="" width="3%">
-                        All roles
-
+                        <i class="fa fa-database" aria-hidden="true"></i> All roles
                         <a href="{{ route('roles.create') }}" class="btn btn-default btn-sm pull-right text-uppercase">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add Role
                         </a>

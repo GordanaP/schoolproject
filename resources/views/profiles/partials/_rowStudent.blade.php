@@ -2,7 +2,7 @@
     <!-- Action buttons -->
     <td class="text-center flex justify-center"  width="100px">
         <a href="{{ route('profiles.edit', $student->user->name) }}" class="btn btn-warning btn-sm">
-            <i class="fa fa-pencil-square-o"></i>
+            <i class="fa fa-pencil"></i>
         </a>
 
         <form action="{{ route('accounts.destroy', $student->user->name) }}" method="POST">
@@ -19,7 +19,7 @@
 
     <!-- Name -->
     <td>
-        <a href="{{ route('profiles.show', $student->user->name) }}">
+        <a href="" id="showProfile" data-id={{ $student->user->name }} data-toggle="modal" data-target="#profileModal">
             {{ $student->full_name }}
         </a>
     </td>

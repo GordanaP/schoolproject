@@ -196,7 +196,7 @@
         >{{ $user->isTeacher() ? $user->teacher->about : $user->student->about  }}</textarea>
 
         <!-- Button -->
-        <button class="btn btn-success btn-block text-uppercase ls">
+        <button class="btn btn-default btn-block text-uppercase ls">
             Save changes
         </button>
     </div>

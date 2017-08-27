@@ -117,6 +117,7 @@ class AccountController extends Controller
          return [
             'create' => 'access',
             'store' => 'access',
+            'resetPassword'  => 'access',
             'updatePassword'  => 'updateAccount',
             'destroy' => 'access',
         ];

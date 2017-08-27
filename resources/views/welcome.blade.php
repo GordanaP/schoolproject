@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('mastercontent')
-    welcome page
+@section('master.content')
+    <h1>Welcome page</h1>
 @endsection
 

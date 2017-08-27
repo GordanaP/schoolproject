@@ -25,4 +25,3 @@
     @endcan
 
 @endif
-

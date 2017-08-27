@@ -48,7 +48,6 @@ class ProfileController extends Controller
         return view('profiles.students_index', compact('students'));
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -57,7 +56,18 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        return view('profiles.show', compact('user'));
+        if (request()->ajax())
+        {
+            return response([
+                'user' => $user->isStudent() ? $user->student : $user->teacher,
+                'role' => $user->isStudent() ? 'student' : 'teacher',
+                'avatar' => Storage::disk('avatars')->has(filename($user->id, 'profile')) ? 'avatar' : 'noAvatar'
+            ]);
+        }
+        else
+        {
+            return view('profiles.show', compact('user'));
+        }
     }
 
     /**

@@ -10,9 +10,9 @@
 
             <small style="font-size: 22px;margin-left: 10px;">
                 @if ($user->isTeacher())
-                    <img src="{{ asset('images/graduate.svg') }}" alt="" width="3%" style="margin-bottom: 10px;"></i>
+                    <img src="{{ asset('images/graduate.svg') }}" alt="" width="3%" style="margin-bottom: 10px;">
                 @else
-                    <img src="{{ asset('images/apple.svg') }}" alt="" width="3%" style="margin-bottom: 8px;"></i>
+                    <img src="{{ asset('images/apple.svg') }}" alt="" width="3%" style="margin-bottom: 8px;">
                 @endif
 
                 <span>

@@ -16,7 +16,7 @@
 <!-- Button -->
 <div class="form-group">
     <div class="col-md-6 col-md-offset-3">
-        <button type="submit" class="btn btn-success text-uppercase ls {{ $class ?? '' }}" >
+        <button type="submit" class="btn text-uppercase ls admin__submit" >
             {{ $button }}
         </button>
     </div>

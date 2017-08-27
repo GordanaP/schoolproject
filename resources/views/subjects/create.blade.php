@@ -24,7 +24,7 @@
                     <h2>
                         <i class="fa fa-pencil"></i> New subject
                         <a href="{{ route('subjects.index') }}" class="btn btn-default btn-sm pull-right text-uppercase">
-                            <i class="fa fa-bars" aria-hidden="true"></i> All subjects
+                            <i class="fa fa-database" aria-hidden="true"></i> All subjects
                         </a>
                     </h2>
                 @endslot
@@ -43,7 +43,6 @@
                         @include('subjects.partials._formCreate', [
                             'name' => old('name'),
                             'button' => 'Create subject',
-                            'class' => 'account__button'
                         ])
 
                     </form>

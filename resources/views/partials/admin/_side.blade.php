@@ -46,7 +46,7 @@
     <!-- Classrooms -->
     <li>
         <a data-toggle="collapse" href="#classrooms" aria-expanded="false" aria-controls="classrooms">
-            <i class="icon_book_alt" aria-hidden="true"></i> Classrooms
+            <i class="icon_flowchart_alt" aria-hidden="true"></i> Classrooms
         </a>
     </li>
     <div class="collapse" id="classrooms">

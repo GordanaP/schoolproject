@@ -2,7 +2,7 @@
     <!-- Action buttons -->
     <td class="text-center flex justify-center"  width="100px">
         <a href="{{ route('roles.edit', $role) }}" class="btn btn-warning btn-sm">
-            <i class="fa fa-pencil-square-o"></i>
+            <i class="fa fa-pencil"></i>
         </a>
 
         <form action="{{ route('roles.destroy', $role) }}" method="POST">

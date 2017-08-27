@@ -24,7 +24,7 @@
                     <h2>
                         <i class="fa fa-pencil"></i> New role
                         <a href="{{ route('roles.index') }}" class="btn btn-default btn-sm pull-right text-uppercase">
-                            <i class="fa fa-bars" aria-hidden="true"></i> All roles
+                            <i class="fa fa-database" aria-hidden="true"></i> All roles
                         </a>
                     </h2>
                 @endslot
@@ -43,7 +43,6 @@
                         @include('roles.partials._formCreate', [
                             'name' => old('name'),
                             'button' => 'Create role',
-                            'class' => 'account__button'
                         ])
 
                     </form>

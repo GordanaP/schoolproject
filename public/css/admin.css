@@ -1,22 +1,33 @@
+.admin__body {color: #212121}
+
 .admin__panel .panel-body { box-shadow: 0 2px 4px rgba(0,0,0,0.18);}
-.admin__panel .panel-heading h2 a.btn { background: firebrick; border-color: firebrick; margin-top: 2px;}
-.admin__panel .panel-heading h2 a.btn:hover { background-color:  #509195; border: 1px solid #478285;}
+.admin__panel .panel-heading { background: #eceff1 !important}
+.admin__panel .panel-heading h2 { color: #212121; font-family: 'Roboto Slab'}
+.admin__panel .panel-heading h2 a.btn { background: #fe5252; border-color: #fe5252; margin-top: 2px;}
+.admin__panel .panel-heading h2 a.btn:hover { background-color:  #c50e29; border: 1px solid #c50e29;}
 .admin__panel .panel-heading h2 a.btn i { margin-right: 6px; }
 
-.account__button { background-color: #e4c201; border: 1px solid #cbad01 }
-.account__button:hover { background-color:  #509195; border: 1px solid #478285; }
+.admin__submit { background: #34515e; border: 1px solid #34515e; letter-spacing: 1px; color:#fefefe;}
+.admin__submit:hover { background-color:  #7ba4b7; border: 1px solid  #7ba4b7; }
 
-table.admin__table .btn-warning{ margin-right: 5px; color: #fff; }
-table.admin__table .btn-danger{ background: firebrick; border: 1px solid #ab2121 }
-table.admin__table a{ color: #509195 }
+table.admin__table .btn-warning{ margin-right: 5px; background: none; border: 1px solid #f44336; color: #757575 }
+table.admin__table .btn-danger{ background: #34515e; border: 1px solid #34515e; color: #fefefe; }
+table.admin__table .btn:hover{ background: #c50e29; border: 1px solid #c50e29; color: #fefefe; }
+table.admin__table a{ color: #757575 }
 
 table.admin__table tr td,
 table.admin__table th { padding: 8px 16px !important; font-size: 13px; }
 
 .admin__breadcrumb ol.breadcrumb{ background: none; margin-bottom: 0; padding: 0;  }
-.admin__breadcrumb ol.breadcrumb li a{ color: #509195; }
+.admin__breadcrumb ol.breadcrumb li a { color: #212121; }
+.admin__breadcrumb ol.breadcrumb li a i{ color: #212121; }
 
 p.admin__checkbox {margin: 10px}
+
+.form-control:focus {
+        border-color: #7ba4b7;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(52, 81, 94, 0.2);
+    }
 
 /*
  * Select 2 override
@@ -64,7 +75,7 @@ body {
  */
 .admin__navbar {
   border: 0;
-  background: #031634;
+  background: #34515e;
 }
 
 h1.page-header{
@@ -92,8 +103,8 @@ h1.page-header{
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #509195;
-    border-right: 1px solid #eee;
+    background-color: #607D8B;
+    border-right: 1px solid #bdbdbd;
   }
 }
 
@@ -106,7 +117,7 @@ h1.page-header{
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
-  color: #fff;
+  color: #fefefe;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,

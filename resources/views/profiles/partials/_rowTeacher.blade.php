@@ -2,7 +2,7 @@
     <!-- Action buttons -->
     <td class="text-center flex justify-center"  width="100px">
         <a href="{{ route('profiles.edit', $teacher->user->name) }}" class="btn btn-warning btn-sm">
-            <i class="fa fa-pencil-square-o"></i>
+            <i class="fa fa-pencil"></i>
         </a>
 
         <form action="{{ route('accounts.destroy', $teacher->user->name) }}" method="POST">

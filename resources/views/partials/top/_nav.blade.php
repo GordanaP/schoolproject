@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-inverse navbar-static-top">
+<nav class="navbar navbar-default navbar-inverse navbar-static-top"  style="background: #002984 !important">
     <div class="container">
         <div class="navbar-header">
 
@@ -37,9 +37,16 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ route('pages.settings', Auth::user()) }}">
-                                <i class="fa fa-wrench" aria-hidden="true"></i> Settings
-                            </a></li>
+                            <li>
+                                <a href="{{ route('events.index') }}">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i> My calendar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pages.settings', Auth::user()) }}">
+                                    <i class="fa fa-wrench" aria-hidden="true"></i> Settings
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

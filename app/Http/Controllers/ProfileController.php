@@ -117,7 +117,7 @@ class ProfileController extends Controller
 
             foreach ($request->classroom_id as $id)
             {
-                $teacher->subjects()->attach($request->subject_id, [
+                $teacher->subjects()->sync($request->subject_id, [
                     'classroom_id' => $id,
                 ]);
             }

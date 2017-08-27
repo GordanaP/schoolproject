@@ -17,6 +17,7 @@ Route::resource('accounts', 'AccountController', [
     'only' => ['create', 'store', 'destroy'],
 ]);
 Route::name('accounts.update.password')->patch('accounts/{user}/password', 'AccountController@updatePassword');
+Route::name('accounts.reset.password')->patch('password/{user}', 'AccountController@resetPassword');
 
 // Profile
 Route::name('profiles.teachers.index')->get('profiles/teachers', 'ProfileController@teachersIndex');
@@ -44,8 +45,11 @@ Route::resource('classrooms', 'ClassroomController', [
     'except' => ['show']
 ]);
 
+// Subject
 Route::resource('subjects', 'Subjectcontroller', [
     'except' => ['show']
 ]);
 
-Route::name('accounts.reset.password')->patch('password/{user}', 'AccountController@resetPassword');
+// Event
+Route::apiResource('events', 'EventController');
+

@@ -5,13 +5,7 @@
     <div class="row">
         <div class="col-md-3">
             @section('sidebar')
-                <ul>
-                    <li>
-                        <a href="{{ route('profiles.show', $user->name) }}">
-                            My Profile
-                        </a>
-                    </li>
-                </ul>
+
             @show
         </div>
 

@@ -25,6 +25,10 @@
 
     <script>
 
+    // Retrieve classrooms
+    @include('calendars.js._ajaxClassrooms')
+
+
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -51,7 +55,9 @@
         select: function(start, event, jsEvent, view){
             $('#eventModal').modal('show');
             start = moment(start.format());
-
+            $('#date').val(start.format('YYYY-MM-DD'));
+            $('#start').val(start.format('HH:mm'));
+            $('#end').val(start.format('HH:mm'));
         }
     });
 

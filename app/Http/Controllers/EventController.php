@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Subject;
+use App\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -12,9 +14,14 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('calendars.event');
+        return view('calendars.event', compact('user'));
+    }
+
+    public function ajaxClassrooms(Subject $subject, User $user)
+    {
+        return view('calendars.partials._ajaxClassrooms', compact('user', 'subject'));
     }
 
     /**

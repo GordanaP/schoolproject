@@ -80,4 +80,9 @@ trait UserAttributes
         }
     }
 
+    public function getSubjectsUniqueAttribute()
+    {
+        return $this->teacher->subjects->unique();
+    }
+
 }

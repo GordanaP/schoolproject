@@ -51,5 +51,6 @@ Route::resource('subjects', 'Subjectcontroller', [
 ]);
 
 // Event
-Route::apiResource('events', 'EventController');
-
+Route::name('events.index')->get('events/{user}', 'EventController@index');
+Route::name('events.store')->post('events/{user}', 'EventController@store');
+Route::get('classrooms/{subject}/{user}', 'EventController@ajaxClassrooms');

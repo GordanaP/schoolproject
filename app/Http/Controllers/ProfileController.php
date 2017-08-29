@@ -121,6 +121,13 @@ class ProfileController extends Controller
                     'classroom_id' => $id,
                 ]);
             }
+
+            // $data = [
+            //     5 => ['classroom_id' => '1'],
+            //     5 => ['classroom_id' => '3'],
+            // ];
+
+            // $teacher->subjects()->sync($data, false);
         }
 
         // Update role

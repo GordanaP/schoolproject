@@ -38,7 +38,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="{{ route('events.index') }}">
+                                <a href="{{ route('events.index', Auth::user()) }}">
                                     <i class="fa fa-calendar" aria-hidden="true"></i> My calendar
                                 </a>
                             </li>

@@ -15,10 +15,10 @@ class Subject extends Model
         static::observe(\App\Observers\SubjectObserver::class);
     }
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
 
     public function getNameAttribute($value)
     {

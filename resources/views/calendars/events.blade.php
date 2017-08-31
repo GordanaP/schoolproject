@@ -36,11 +36,24 @@
     // Retrieve classrooms for a selected subject
     @include('calendars.js._ajaxClassrooms')
 
-    // Create event
-    $(document).on('click', '#createEvent', function(){
-        var user = $(this).data('user');
-        var url = '../events/' + user;
 
+    // Create event
+    var user = $('#createEvent').data('user');
+    var url = '../calendar/' + user;
+
+    $(document).on('click', '#createEvent', function(){
+
+        var event = {
+          title:$('#title').val(),
+          start: $('#date').val(),
+          end: $('#date').val(),
+          allDay: false,
+        };
+
+        // Add to calendar
+        $('#calendar').fullCalendar( 'renderEvent', event);
+
+        // Store into DB
         $.ajax({
             url: url,
             method: 'POST',
@@ -93,6 +106,12 @@
                 $("input, select").val("").end();
               });
         },
+        eventLimit: true,
+        eventSources: [
+            {
+                url: url
+            }
+        ],
     });
 
     </script>

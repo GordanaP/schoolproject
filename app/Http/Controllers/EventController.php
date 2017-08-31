@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Subject;
 use App\User;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,12 @@ class EventController extends Controller
      */
     public function index(User $user)
     {
-        return view('calendars.event', compact('user'));
+        if (request()->ajax())
+        {
+            return $user->events;
+        }
+
+        return view('calendars.events', compact('user'));
     }
 
     public function ajaxClassrooms(Subject $subject, User $user)

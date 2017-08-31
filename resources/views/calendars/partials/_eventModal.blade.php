@@ -11,9 +11,6 @@
 
             <div class="modal-body" style="background: #e1e2e2">
 
-                <!-- User -->
-                <input type="hidden" id="user" value="{{ $user->name }}">
-
                 <!-- Event -->
                 <div class="form-group">
                     <label for="title">Event title</label>
@@ -25,8 +22,8 @@
                 <div class="form-group">
                     <label for="subject_id">Subject</label>
                     <select name="subject_id" id="subject_id" class="form-control">
-                        <option selected disabled>Select a subject</option>
-                        @foreach (Auth::user()->subjects_unique as $subject)
+                        <option value="" selected="" disabled="">Select a subject</option>
+                        @foreach ($user->subjects_unique as $subject)
                             <option value="{{ $subject->id }}">
                                 {{ ucwords($subject->name) }}
                             </option>
@@ -69,7 +66,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal" style="background: none; border: 1px solid #c69000">
                     Close
                 </button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" style="background: #fec007; border: 1px solid #fec007">Create event</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="createEvent" data-user="{{ $user->name }}" style="background: #fec007; border: 1px solid #fec007">Create event</button>
             </div>
         </div>
     </div>

@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasOne(Teacher::class);
     }
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
     public function owns($related)
     {
         return $this->id == $related->user_id;

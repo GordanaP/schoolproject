@@ -10,6 +10,7 @@
 
 @section('master.content')
 
+    <!-- Event modal -->
     @include('calendars.partials._eventModal')
 
     <!-- Calendar -->
@@ -25,9 +26,37 @@
 
     <script>
 
-    // Retrieve classrooms
+    // CSRF token
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    // Retrieve classrooms for a selected subject
     @include('calendars.js._ajaxClassrooms')
 
+    // Create event
+    $(document).on('click', '#createEvent', function(){
+        var user = $(this).data('user');
+        var url = '../events/' + user;
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data : {
+                title : $('#title').val(),
+                subject_id : $('#subject_id').val(),
+                classroom_id : $('#classroom_id').val(),
+                start : $('#date').val() + ' ' + $('#start').val(),
+                end : $('#date').val() + ' ' + $('#end').val(),
+                user : user,
+            },
+            success: function(data){
+                console.log(data);
+            }
+        })
+    })
 
     $('#calendar').fullCalendar({
         header: {
@@ -54,13 +83,17 @@
         ],
         select: function(start, event, jsEvent, view){
             $('#eventModal').modal('show');
+
             start = moment(start.format());
             $('#date').val(start.format('YYYY-MM-DD'));
             $('#start').val(start.format('HH:mm'));
             $('#end').val(start.format('HH:mm'));
-        }
+
+            $(".modal").on("hidden.bs.modal", function() {
+                $("input, select").val("").end();
+              });
+        },
     });
 
     </script>
 @endsection
-

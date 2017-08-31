@@ -110,14 +110,14 @@ class ProfileController extends Controller
         // Update account
         $user->updateAccount($user, $request);
 
-        //Subjects & classrooms
+        // Subjects & classrooms
         if ($user->isTeacher())
         {
             $teacher = $user->teacher;
 
             foreach ($request->classroom_id as $id)
             {
-                $teacher->subjects()->sync($request->subject_id, [
+                $teacher->subjects()->attach($request->subject_id, [
                     'classroom_id' => $id,
                 ]);
             }

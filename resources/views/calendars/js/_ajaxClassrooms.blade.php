@@ -1,6 +1,6 @@
 $(document).on('change', '#subject_id', function(){
     var subject_id = $(this).val();
-    var user = $('#user').val();
+    var user = $('#createEvent').data('user');
 
     if(subject_id)
     {

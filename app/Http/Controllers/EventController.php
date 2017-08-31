@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use App\Subject;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -30,9 +31,21 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        //
+        $event = new Event;
+
+        $event->title = $request->title;
+        $event->subject_id = $request->subject_id;
+        $event->classroom_id = $request->classroom_id;
+        $event->start = new Carbon($request->date .' '.$request->start);
+        $event->end = new Carbon($request->date .' '.$request->end);
+
+        $user->events()->save($event);
+
+        return response([
+            'message' => 'A new event has been created.'
+        ]);
     }
 
     /**

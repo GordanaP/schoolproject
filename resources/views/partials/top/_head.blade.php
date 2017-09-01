@@ -23,6 +23,10 @@
 <!-- Scripts -->
 <script>
     window.Laravel = {!! json_encode([
-        'csrfToken' => csrf_token()
+        'csrfToken' => csrf_token(),
+        'user' => [
+            'name' => Auth::check() ? Auth::user()->name : '',
+            'role' => Auth::check() && (Auth::user()->isSuperAdmin() || Auth::user()->isAdmin()) ? 'admin' : '',
+        ],
     ]) !!};
 </script>

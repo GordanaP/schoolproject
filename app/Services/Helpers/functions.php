@@ -53,6 +53,30 @@ function password($f_name, $l_name, $dob)
     return $f_name_init . $l_name_init . $year . $month . $day;
 }
 
+
+function validateDate($date)
+{
+
+
+    $year = $date->year;
+
+    if (strlen($date->month) == 1) {
+        $month = '0'.$date->month;
+    }
+    else{
+        $month = $date->month;
+    }
+
+    if (strlen($date->day) == 1) {
+        $day = '0'.$date->day;
+    }
+    else{
+        $day = $date->day;
+    }
+
+    return $year. '-' . $month . '-' . $day;
+}
+
 function slug_name($f_name, $l_name)
 {
     return str_slug(getFirst($f_name) . '-' . getFirst($l_name));

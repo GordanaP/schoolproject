@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Http\Requests\EventRequest;
 use App\Subject;
 use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class EventController extends Controller
 {
@@ -31,6 +33,11 @@ class EventController extends Controller
         return view('calendars.partials._ajaxClassrooms', compact('user', 'subject'));
     }
 
+    public function create(User $user)
+    {
+        return view('events.create', compact('user'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -47,11 +54,28 @@ class EventController extends Controller
         $event->start = new Carbon($request->date .' '.$request->start);
         $event->end = new Carbon($request->date .' '.$request->end);
 
-        $user->events()->save($event);
+        $event = $user->events()->save($event);
 
         return response([
-            'message' => 'A new event has been created.'
+            'message' => 'A new event has been created.',
+            'event' => $event
         ]);
+    }
+
+
+    public function storeEvent(EventRequest $request, User $user)
+    {
+        $event = new Event;
+
+        $event->title = $request->title;
+        $event->subject_id = $request->subject_id;
+        $event->classroom_id = $request->classroom_id;
+        $event->start = new Carbon($request->date .' '.$request->start);
+        $event->end = new Carbon($request->date .' '.$request->end);
+
+        $event = $user->events()->save($event);
+
+        return redirect()->route('events.index', $user);
     }
 
     /**

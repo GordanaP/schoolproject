@@ -54,3 +54,6 @@ Route::resource('subjects', 'Subjectcontroller', [
 Route::name('events.index')->get('calendar/{user}', 'EventController@index');
 Route::name('events.store')->post('calendar/{user}', 'EventController@store');
 Route::get('classrooms/{subject}/{user}', 'EventController@ajaxClassrooms');
+
+Route::name('events.create')->get('events/create/{user}', 'EventController@create');
+Route::name('events.store.event')->post('events/create/{user}', 'EventController@storeEvent');

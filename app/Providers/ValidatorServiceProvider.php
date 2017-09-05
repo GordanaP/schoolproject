@@ -43,6 +43,11 @@ class ValidatorServiceProvider extends ServiceProvider
 
             return array_intersect($array, $value) != $array;
         });
+
+        Validator::extend('time', function($attribute, $value)
+        {
+            return preg_match('/(0[8-9]|1[0-9]):([0-5][0-9])/', $value);
+        });
     }
 
     /**

@@ -11,6 +11,9 @@
 
 @section('master.content')
 
+    <!-- Message -->
+    @include('errors._list')
+
     <!-- Event modal -->
     @include('calendars.partials._eventModal')
 
@@ -27,6 +30,7 @@
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
     <script src="{{ asset('vendor/parsley/laravel-parsley.min.js') }}"></script>
 
+    <!-- Events.blade.php script -->
     <script>
 
         // CSRF token
@@ -65,57 +69,119 @@
         var url = '../calendar/' + user;
 
         // Validate all the input fields on modal submit
+        // $('#createEvent').click(function(e)
+        // {
+        //     e.preventDefault();
+
+        //     var isValid = true;
+
+        //     $('#eventForm input, select').each(function(){
+        //         if($(this).parsley().validate() !== true)
+        //             isValid = false;
+        //     })
+
+        //     // Submit form if validation is successfull
+        //     if(isValid)
+        //     {
+        //         $(document).on('click', '#createEvent', function()
+        //         {
+        //             // Add event to calendar
+        //             var event = {
+        //               title:$('#title').val(),
+        //               start: $('#date').val(),
+        //               end: $('#date').val(),
+        //               allDay: false,
+        //             };
+
+        //             $('#calendar').fullCalendar( 'renderEvent', event);
+
+        //             // Store event into DB
+        //             $.ajax({
+        //                 url: url,
+        //                 method: 'POST',
+        //                 data : {
+        //                     title : $('#title').val(),
+        //                     subject_id : $('#subject_id').val(),
+        //                     classroom_id : $('#classroom_id').val(),
+        //                     start : $('#date').val() + ' ' + $('#start').val(),
+        //                     end : $('#date').val() + ' ' + $('#end').val(),
+        //                     user : user,
+        //                 },
+        //                 success: function(data){
+        //                     $('#eventModal').modal('hide');
+        //                     console.log(data);
+        //                 }
+        //             });
+        //         });
+        //     }
+        // });
+        //
+        //
+
         $('#createEvent').click(function(e)
         {
             e.preventDefault();
 
-            var isValid = true;
-
-            $('#eventForm input, select').each(function(){
-                if($(this).parsley().validate() !== true)
-                    isValid = false;
-            })
-
-            // Submit form if validation is successfull
-            if(isValid)
+            $(document).on('click', '#createEvent', function()
             {
-                $(document).on('click', '#createEvent', function()
-                {
-                    // Add event to calendar
-                    var event = {
-                      title:$('#title').val(),
-                      start: $('#date').val(),
-                      end: $('#date').val(),
-                      allDay: false,
-                    };
+                // Add event to calendar
+                var event = {
+                  title:$('#title').val(),
+                  start: $('#date').val(),
+                  end: $('#date').val(),
+                  allDay: false,
+                };
 
-                    $('#calendar').fullCalendar( 'renderEvent', event);
+                $('#calendar').fullCalendar( 'renderEvent', event);
 
-                    // Store event into DB
-                    $.ajax({
-                        url: url,
-                        method: 'POST',
-                        data : {
-                            title : $('#title').val(),
-                            subject_id : $('#subject_id').val(),
-                            classroom_id : $('#classroom_id').val(),
-                            start : $('#date').val() + ' ' + $('#start').val(),
-                            end : $('#date').val() + ' ' + $('#end').val(),
-                            user : user,
-                        },
-                        success: function(data){
-                            $('#eventModal').modal('hide');
-                            console.log(data);
-                        }
-                    });
+
+                // Store event into DB
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data : {
+                        title : $('#title').val(),
+                        subject_id : $('#subject_id').val(),
+                        classroom_id : $('#classroom_id').val(),
+                        start : $('#date').val() + ' ' + $('#start').val(),
+                        end : $('#date').val() + ' ' + $('#end').val(),
+                        user : user,
+                    },
+                    success: function(data){
+                        $('#eventModal').modal('hide');
+                        console.log(data);
+                    },
+                    fail: function(data) {
+                         associate_errors(response['errors'], $(this));
+                    }
                 });
-            }
+            });
         });
+
+        function associate_errors(errors, $form)
+        {
+            $form.find('.form-group').removeClass('has-errors').find('.help-text').text('');
+
+            errors.foreach(function(value, index){
+                var $group = $form.find('#' + index + '-group');
+
+                $group.addClass('has-errors').find('.help-text').text(value);
+            });
+        }
+
 
 
         $('#calendar').fullCalendar({
+            customButtons:{
+                newEvent: {
+                    text: 'New event',
+                    click: function(event, jsEvent, view){
+                         window.location.href = '../events/create/' + user;
+                    },
+                }
+            },
             header: {
-                left: 'prev,next today',
+                left: 'prev,next tkoday newEvent',
                 center: 'title',
                 right: 'month, agendaWeek, agendaDay, list'
             },
@@ -163,4 +229,5 @@
         });
 
     </script>
+
 @endsection

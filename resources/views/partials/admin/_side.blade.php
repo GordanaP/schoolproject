@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <!-- Classrooms -->
+    <!-- Subjects -->
     <li>
         <a data-toggle="collapse" href="#subjects" aria-expanded="false" aria-controls="subjects">
             <i class="icon_pushpin" aria-hidden="true"></i> Subjects

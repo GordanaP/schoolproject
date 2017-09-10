@@ -3,7 +3,6 @@
 @section('links')
     <link rel="stylesheet" href="{{ asset('vendor/fullcalendar/fullcalendar.min.css') }}">
     <link rel="stylesheet" type="media" href="{{ asset('vendor/fullcalendar/fullcalendar.print.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/datetimepicker/css/bootstrap-material-datetimepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/datepicker/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/parsley/parsley.css') }}">
 @endsection
@@ -25,12 +24,10 @@
 @section('scripts')
     <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
     <script src="{{ asset('vendor/fullcalendar/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('vendor/datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
     <script src="{{ asset('vendor/datepicker/jquery-ui.js') }}"></script>
     <script src="{{ asset('vendor/parsley/parsley.min.js') }}"></script>
     <script src="{{ asset('vendor/parsley/laravel-parsley.min.js') }}"></script>
 
-    <!-- Events.blade.php script -->
     <script>
 
         // CSRF token
@@ -69,108 +66,54 @@
         var url = '../calendar/' + user;
 
         // Validate all the input fields on modal submit
-        // $('#createEvent').click(function(e)
-        // {
-        //     e.preventDefault();
-
-        //     var isValid = true;
-
-        //     $('#eventForm input, select').each(function(){
-        //         if($(this).parsley().validate() !== true)
-        //             isValid = false;
-        //     })
-
-        //     // Submit form if validation is successfull
-        //     if(isValid)
-        //     {
-        //         $(document).on('click', '#createEvent', function()
-        //         {
-        //             // Add event to calendar
-        //             var event = {
-        //               title:$('#title').val(),
-        //               start: $('#date').val(),
-        //               end: $('#date').val(),
-        //               allDay: false,
-        //             };
-
-        //             $('#calendar').fullCalendar( 'renderEvent', event);
-
-        //             // Store event into DB
-        //             $.ajax({
-        //                 url: url,
-        //                 method: 'POST',
-        //                 data : {
-        //                     title : $('#title').val(),
-        //                     subject_id : $('#subject_id').val(),
-        //                     classroom_id : $('#classroom_id').val(),
-        //                     start : $('#date').val() + ' ' + $('#start').val(),
-        //                     end : $('#date').val() + ' ' + $('#end').val(),
-        //                     user : user,
-        //                 },
-        //                 success: function(data){
-        //                     $('#eventModal').modal('hide');
-        //                     console.log(data);
-        //                 }
-        //             });
-        //         });
-        //     }
-        // });
-        //
-        //
-
         $('#createEvent').click(function(e)
         {
             e.preventDefault();
 
-            $(document).on('click', '#createEvent', function()
+            var isValid = true;
+
+            $('#eventForm input, select').each(function(){
+                if($(this).parsley().validate() !== true)
+                    isValid = false;
+            })
+
+            // Submit form if validation is successfull
+            if(isValid)
             {
-                // Add event to calendar
-                var event = {
-                  title:$('#title').val(),
-                  start: $('#date').val(),
-                  end: $('#date').val(),
-                  allDay: false,
-                };
+                $(document).on('click', '#createEvent', function()
+                {
+                    // Add event to calendar
+                    var event = {
+                      title:$('#title').val(),
+                      start: $('#date').val(),
+                      end: $('#date').val(),
+                      allDay: false,
+                    };
 
-                $('#calendar').fullCalendar( 'renderEvent', event);
+                    $('#calendar').fullCalendar( 'renderEvent', event);
 
-
-                // Store event into DB
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data : {
-                        title : $('#title').val(),
-                        subject_id : $('#subject_id').val(),
-                        classroom_id : $('#classroom_id').val(),
-                        start : $('#date').val() + ' ' + $('#start').val(),
-                        end : $('#date').val() + ' ' + $('#end').val(),
-                        user : user,
-                    },
-                    success: function(data){
-                        $('#eventModal').modal('hide');
-                        console.log(data);
-                    },
-                    fail: function(data) {
-                         associate_errors(response['errors'], $(this));
-                    }
+                    // Store event into DB
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data : {
+                            title : $('#title').val(),
+                            subject_id : $('#subject_id').val(),
+                            classroom_id : $('#classroom_id').val(),
+                            start : $('#date').val() + ' ' + $('#start').val(),
+                            end : $('#date').val() + ' ' + $('#end').val(),
+                            user : user,
+                        },
+                        success: function(data){
+                            $('#eventModal').modal('hide');
+                            console.log(data);
+                        }
+                    });
                 });
-            });
+            }
         });
 
-        function associate_errors(errors, $form)
-        {
-            $form.find('.form-group').removeClass('has-errors').find('.help-text').text('');
-
-            errors.foreach(function(value, index){
-                var $group = $form.find('#' + index + '-group');
-
-                $group.addClass('has-errors').find('.help-text').text(value);
-            });
-        }
-
-
-
+        // Calendar
         $('#calendar').fullCalendar({
             customButtons:{
                 newEvent: {

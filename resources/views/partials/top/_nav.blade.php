@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-inverse navbar-static-top"  style="background: #002984 !important">
+<nav class="navbar navbar-default navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
 
@@ -19,7 +19,11 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                &nbsp;
+                <li>
+                    <a href="{{ route('lectures.create', Auth::user()) }}">
+                        <i class="icon_folder-add_alt"></i> New lecture
+                    </a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -37,6 +41,11 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ route('lectures.index', Auth::user()) }}">
+                                    <i class="fa fa-folder-o"></i> My lectures
+                                </a>
+                            </li>
                             <li>
                                 <a href="{{ route('events.index', Auth::user()) }}">
                                     <i class="fa fa-calendar" aria-hidden="true"></i> My calendar

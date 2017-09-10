@@ -11,15 +11,9 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 <!-- Icons -->
-{{-- <link rel="stylesheet" href="{{ asset('vendor/heroicon/demo.css') }}">
-<link rel="stylesheet" href="{{ asset('vendor/heroicon/sample1.css') }}">
-<link rel="stylesheet" href="{{ asset('vendor/heroicon/sample2.css') }}">
- --}}
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/elegant-icons-style.css') }}">
-{{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
- --}}
+
 <!-- Scripts -->
 <script>
     window.Laravel = {!! json_encode([

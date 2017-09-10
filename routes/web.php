@@ -57,3 +57,8 @@ Route::get('classrooms/{subject}/{user}', 'EventController@ajaxClassrooms');
 
 Route::name('events.create')->get('events/create/{user}', 'EventController@create');
 Route::name('events.store.event')->post('events/create/{user}', 'EventController@storeEvent');
+
+// Lecture
+Route::name('lectures.index')->get('lectures/{user}', 'LectureController@index');
+Route::name('lectures.store')->post('lectures/{user}', 'LectureController@store');
+Route::name('lectures.create')->get('lectures/{user}/create', 'LectureController@create');
